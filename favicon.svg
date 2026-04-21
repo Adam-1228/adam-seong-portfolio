@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Adam Seong AI Engineer · A Monogram Favicon (theme-aware) -->
+  <style>
+    .bg { fill: #FAFAF7; }
+    .fg { fill: #0E0E0C; stroke: #0E0E0C; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #0B0B0A; }
+      .fg { fill: #F2F1EC; stroke: #F2F1EC; }
+    }
+  </style>
+
+  <!-- Background -->
+  <rect class="bg" width="64" height="64"/>
+
+  <!-- Monogram frame (stroked) -->
+  <rect class="fg" x="8" y="8" width="48" height="48" fill="none" stroke-width="2.5"/>
+
+  <!-- A letter, centered -->
+  <text class="fg" x="32" y="45"
+        text-anchor="middle"
+        font-family="'Inter Tight', Inter, system-ui, sans-serif"
+        font-weight="500"
+        font-size="38"
+        letter-spacing="-1.2"
+        stroke="none">A</text>
+
+  <!-- Green corner brackets (same on both themes) -->
+  <path d="M 6 58 L 10 58 L 10 54" stroke="#3fb950" stroke-width="2.5" fill="none" stroke-linecap="square"/>
+  <path d="M 58 6 L 54 6 L 54 10" stroke="#3fb950" stroke-width="2.5" fill="none" stroke-linecap="square"/>
+</svg>
