@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  Adam Seong · AI Engineer Portfolio
+  ============================================================================
+  단일 파일 정적 포트폴리오 사이트 (Single-file static portfolio).
+
+    Stack    : Vanilla HTML + CSS + JavaScript (프레임워크 없음, 빌드 없음)
+    Fonts    : Inter Tight, JetBrains Mono (Google Fonts)
+    License  : © 2026 Adam Seong. All rights reserved.
+    Contact  : giha1205@gmail.com
+
+  ----------------------------------------------------------------------------
+  설계 원칙
+    1. 데모가 아니라 운영 — 안정적으로 매일 돌아가는 코드.
+    2. 관찰 가능성 우선 — 주석으로 구조를 추적 가능하게 한다.
+    3. 의존성 최소 — 외부 빌드 도구 없이 브라우저만으로 실행된다.
+
+  실행 방법
+    - 로컬: 이 파일을 브라우저로 바로 열면 됩니다.
+    - 배포: GitHub Pages / Vercel / Netlify 등 정적 호스팅 아무거나.
+
+  파일 구조
+    ./index.html                    ← 본 파일 (사이트 본문)
+    ./Adam_AI_Portfolio_final.pdf   ← 포트폴리오 다운로드용 PDF
+    ./README.md                     ← 저장소 설명
+  ============================================================================
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adam Seong · AI Engineer</title>
+
+  <!-- SEO 및 검색 엔진용 기본 설명 -->
+  <meta name="description" content="Adam Seong — AI Engineer based in Seoul. 업무 프로세스 자동화, LLM Agent, 실시간 데이터 파이프라인, 클라우드 배포.">
+  <meta name="author" content="Adam Seong">
+
+  <!-- Open Graph 태그: 카카오톡 / 슬랙 / 페이스북 링크 미리보기용 -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Adam Seong · AI Engineer">
+  <meta property="og:description" content="업무 프로세스 자동화 · LLM Agent · 실시간 데이터 파이프라인 · 클라우드 배포.">
+  <meta property="og:locale" content="ko_KR">
+
+  <!-- 모바일 브라우저 주소창 색상 (라이트/다크 각각) -->
+  <meta name="theme-color" content="#FAFAF7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0B0B0A" media="(prefers-color-scheme: dark)">
+
+  <!-- Google Fonts: Inter Tight (본문/제목), JetBrains Mono (레이블/시간/태그) -->
+  <!-- preconnect로 폰트 서버와 미리 핸드셰이크 → 로딩 지연 감소 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAFAF7;
+      --fg: #0E0E0C;
+      --accent: oklch(0.68 0.15 148);
+      --hairline: rgba(14, 14, 12, 0.14);
+      --muted: rgba(14, 14, 12, 0.55);
+      --muted-strong: rgba(14, 14, 12, 0.78);
+      --card: rgba(14, 14, 12, 0.02);
+    }
+    [data-theme="dark"] {
+      --bg: #0B0B0A;
+      --fg: #F2F1EC;
+      --hairline: rgba(242, 241, 236, 0.14);
+      --muted: rgba(242, 241, 236, 0.55);
+      --muted-strong: rgba(242, 241, 236, 0.78);
+      --card: rgba(242, 241, 236, 0.02);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      min-height: 100vh;
+    }
+    .mono { font-family: 'JetBrains Mono', monospace; letter-spacing: 0; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+
+    /* ===== Sidebar ===== */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 220px;
+      height: 100vh;
+      padding: 40px 28px 28px;
+      border-right: 1px solid var(--hairline);
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+      background: var(--bg);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 44px;
+    }
+    .monogram {
+      width: 42px;
+      height: 42px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .monogram::before,
+    .monogram::after,
+    .monogram .ctr,
+    .monogram .cbr {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--fg);
+      transition: border-color 0.25s ease;
+    }
+    .monogram::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+    .monogram::after  { bottom: 0; left: 0; border-right: none; border-top: none; }
+    .monogram .ctr    { top: 0; right: 0; border-left: none; border-bottom: none; }
+    .monogram .cbr    { bottom: 0; right: 0; border-left: none; border-top: none; }
+    .monogram .a-letter {
+      font-family: 'Inter Tight', sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: -0.04em;
+    }
+    .brand-text .name {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .brand-text .role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      flex-grow: 1;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 0 9px 16px;
+      font-size: 12px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      position: relative;
+      cursor: pointer;
+      transition: color 0.15s ease, border-color 0.15s ease;
+      border-left: 1px solid transparent;
+      letter-spacing: 0.02em;
+    }
+    .nav-item:hover { color: var(--muted-strong); }
+    .nav-item .num { opacity: 0.7; font-weight: 400; }
+    .nav-item.active {
+      color: var(--fg);
+      border-left: 1px solid var(--accent);
+      box-shadow: inset 1px 0 0 var(--accent);
+    }
+    .nav-item.active .num { color: var(--accent); opacity: 1; }
+
+    .sidebar-footer {
+      border-top: 1px solid var(--hairline);
+      padding-top: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .meta-row .key { letter-spacing: 0.08em; }
+    .meta-row .val {
+      color: var(--fg);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.02em;
+    }
+    .avail { display: flex; align-items: center; gap: 6px; }
+    .avail-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ===== Main ===== */
+    .main {
+      margin-left: 220px;
+      padding: 72px;
+      max-width: 1280px;
+    }
+    .section {
+      min-height: 100vh;
+      padding: 0 0 120px;
+      display: flex;
+      flex-direction: column;
+      scroll-margin-top: 40px;
+    }
+    .section:first-child { padding-top: 0; }
+
+    .sec-head {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 40px;
+      align-items: baseline;
+      margin-bottom: 48px;
+      padding-top: 40px;
+      border-top: 1px solid var(--hairline);
+    }
+    .sec-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      padding-top: 14px;
+    }
+    h2 {
+      font-size: clamp(34px, 4.2vw, 52px);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+    }
+    h2 .muted-h { color: var(--muted); font-weight: 400; }
+
+    /* ===== 01 Intro ===== */
+    #intro { padding-top: 72px; padding-bottom: 72px; }
+    .intro-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 64px;
+    }
+    .intro-top .dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .headline {
+      font-size: clamp(56px, 7.2vw, 96px);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 1.0;
+      margin-bottom: 48px;
+    }
+    .headline .underline-word {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 4px;
+    }
+    .headline .underline-word .ul-svg {
+      position: absolute;
+      left: 0; right: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 12px;
+      pointer-events: none;
+    }
+    .sub {
+      font-size: 18px;
+      color: var(--muted-strong);
+      max-width: 640px;
+      line-height: 1.55;
+      margin-bottom: 40px;
+      letter-spacing: -0.015em;
+    }
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 80px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 14px 22px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      border: 1px solid var(--fg);
+      background: var(--fg);
+      color: var(--bg);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn:hover { opacity: 0.88; }
+    .btn.ghost {
+      background: transparent;
+      color: var(--fg);
+      border-color: var(--hairline);
+    }
+    .btn.ghost:hover { border-color: var(--fg); opacity: 1; }
+    .btn .arr { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: auto;
+      border-top: 1px solid var(--hairline);
+    }
+    .kpi {
+      padding: 28px 24px 0 0;
+      border-right: 1px solid var(--hairline);
+    }
+    .kpi:last-child { border-right: none; padding-right: 0; }
+    .kpi-val {
+      font-size: clamp(32px, 3.4vw, 44px);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 1;
+      margin-bottom: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+    .kpi-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ===== 02 About ===== */
+    .about-body {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 64px;
+    }
+    .about-text p {
+      font-size: 16px;
+      color: var(--muted-strong);
+      line-height: 1.65;
+      letter-spacing: -0.01em;
+    }
+    .about-text p + p { margin-top: 20px; }
+    .profile-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      border-left: 1px solid var(--hairline);
+      padding-left: 28px;
+    }
+    .pm-item .k {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .pm-item .v {
+      font-size: 14px;
+      color: var(--fg);
+      letter-spacing: -0.01em;
+    }
+    .pm-item .v.accent-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pm-item .v.accent-text::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* ===== 03 Services ===== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--hairline);
+      border-left: 1px solid var(--hairline);
+    }
+    .service-card {
+      padding: 36px 32px;
+      border-right: 1px solid var(--hairline);
+      border-bottom: 1px solid var(--hairline);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 340px;
+      transition: background 0.2s ease;
+    }
+    .service-card:hover { background: var(--card); }
+    .service-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .service-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted-strong);
+      letter-spacing: 0.1em;
+      padding: 5px 9px;
+      border: 1px solid var(--hairline);
+    }
+    .service-metric { text-align: right; }
+    .service-metric .v {
+      font-size: 32px;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .service-metric .l {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+    .service-title {
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+    .service-body {
+      font-size: 14px;
+      color: var(--muted-strong);
+      line-height: 1.6;
+    }
+    .service-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: auto;
+      padding-top: 16px;
+    }
+    .service-bullets li {
+      font-size: 12px;
+      color: var(--muted-strong);
+      padding-left: 18px;
+      position: relative;
+      letter-spacing: -0.005em;
+    }
+    .service-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    /* ===== 04 Projects ===== */
+    .projects { border-top: 1px solid var(--hairline); }
+    .project {
+      padding: 36px 0;
+      border-bottom: 1px solid var(--hairline);
+      display: grid;
+      grid-template-columns: 120px 1fr 180px;
+      gap: 40px;
+      align-items: start;
+    }
+    .project-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .project-code .code-id {
+      color: var(--fg);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+    .project-code .live {
+      color: var(--accent);
+      padding: 3px 7px;
+      border: 1px solid var(--accent);
+      font-size: 9px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    .project-code .since { display: block; font-size: 10px; color: var(--muted); }
+    .project-title {
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+      line-height: 1.15;
+    }
+    .project-tags {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+    }
+    .project-desc {
+      font-size: 14px;
+      color: var(--muted-strong);
+      line-height: 1.6;
+      margin-bottom: 18px;
+      max-width: 620px;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 4px 9px;
+      border: 1px solid var(--hairline);
+      color: var(--muted-strong);
+    }
+    .project-impact {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .project-impact .k {
+      display: block;
+      margin-bottom: 6px;
+    }
+    .project-impact .v {
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 18px;
+      color: var(--fg);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+    }
+
+    /* ===== 05 Process ===== */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--hairline);
+      position: relative;
+    }
+    .step {
+      padding: 32px 28px 32px 0;
+      border-right: 1px solid var(--hairline);
+      position: relative;
+    }
+    .step:last-child { border-right: none; }
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 44px;
+      right: -4px;
+      width: 8px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .step:last-child::before { display: none; }
+    .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+    }
+    .step-title {
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      margin-bottom: 6px;
+    }
+    .step-dur {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 18px;
+      letter-spacing: 0.06em;
+    }
+    .step-body {
+      font-size: 13px;
+      color: var(--muted-strong);
+      line-height: 1.6;
+    }
+
+    /* ===== 06 Stack ===== */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--hairline);
+      border-left: 1px solid var(--hairline);
+    }
+    .stack-cat {
+      padding: 28px 24px;
+      border-right: 1px solid var(--hairline);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .stack-cat h4 {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .stack-cat h4::before {
+      content: '';
+      width: 6px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .stack-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .stack-list li {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted-strong);
+      letter-spacing: 0;
+    }
+
+    /* ===== 07 Contact ===== */
+    .contact-cta {
+      padding: 56px 48px;
+      border: 1px solid var(--hairline);
+      margin-bottom: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .contact-cta h3 {
+      font-size: clamp(28px, 3.6vw, 42px);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 1.15;
+      margin-bottom: 32px;
+      max-width: 640px;
+    }
+    .contact-btns {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .contact-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      line-height: 1.7;
+    }
+
+    .faq {
+      border-top: 1px solid var(--hairline);
+      margin-bottom: 64px;
+    }
+    .faq-item { border-bottom: 1px solid var(--hairline); }
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      padding: 22px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      color: var(--fg);
+      font-size: 15px;
+      letter-spacing: -0.02em;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .faq-q:hover { color: var(--accent); }
+    .faq-q .plus {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      color: var(--muted);
+      transition: transform 0.2s ease, color 0.2s ease;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-q { color: var(--fg); }
+    .faq-item.open .plus {
+      transform: rotate(45deg);
+      color: var(--accent);
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding-bottom 0.3s ease;
+      font-size: 14px;
+      color: var(--muted-strong);
+      line-height: 1.65;
+    }
+    .faq-item.open .faq-a {
+      max-height: 260px;
+      padding-bottom: 22px;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--hairline);
+      border-left: 1px solid var(--hairline);
+      margin-bottom: 48px;
+    }
+
+    /* ===== Download CTA ===== */
+    .download-cta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 28px 32px;
+      border: 1px solid var(--hairline);
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      transition: border-color 0.2s ease;
+    }
+    .download-cta:hover { border-color: var(--fg); }
+    .download-cta-text {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .download-cta-text .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+    .download-cta-text .title {
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      color: var(--fg);
+    }
+    .download-cta-text .meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+    .download-cta .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 20px;
+      border: 1px solid var(--fg);
+      background: var(--fg);
+      color: var(--bg);
+      font-size: 13px;
+      letter-spacing: -0.01em;
+      font-weight: 500;
+      transition: opacity 0.15s ease;
+      white-space: nowrap;
+    }
+    .download-cta .dl-btn:hover { opacity: 0.88; }
+    .download-cta .dl-btn .arr {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+    .principle {
+      padding: 28px 24px;
+      border-right: 1px solid var(--hairline);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .principle .num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .principle .t {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .principle .b {
+      font-size: 12px;
+      color: var(--muted-strong);
+      line-height: 1.6;
+    }
+
+    footer {
+      border-top: 1px solid var(--hairline);
+      padding: 28px 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer .social { display: flex; gap: 24px; }
+    footer a {
+      color: var(--muted-strong);
+      transition: color 0.15s;
+    }
+    footer a:hover { color: var(--accent); }
+
+    /* ===== Theme toggle ===== */
+    .theme-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      padding: 10px 14px;
+      border: 1px solid var(--hairline);
+      background: var(--bg);
+      color: var(--fg);
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .theme-toggle:hover {
+      border-color: var(--fg);
+      color: var(--accent);
+    }
+    .theme-toggle .dot-tt {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--fg);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 960px) {
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--hairline);
+        padding: 24px 28px;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+      }
+      .brand { margin-bottom: 0; }
+      .nav { flex-direction: row; overflow-x: auto; gap: 8px; flex-grow: 1; }
+      .nav-item { border-left: none; padding: 6px 10px; white-space: nowrap; }
+      .nav-item.active { border-left: none; box-shadow: inset 0 -1px 0 var(--accent); }
+      .sidebar-footer { display: none; }
+      .main { margin-left: 0; padding: 40px 24px; max-width: 100%; }
+      .section { min-height: auto; padding-bottom: 80px; }
+      #intro { padding-top: 40px; }
+      .headline { font-size: clamp(40px, 10vw, 64px); }
+      .kpi-grid, .services-grid, .process-grid, .principles { grid-template-columns: 1fr 1fr; }
+      .stack-grid { grid-template-columns: 1fr 1fr; }
+      .step::before { display: none; }
+      .project { grid-template-columns: 1fr; gap: 20px; }
+      .project-impact { text-align: left; }
+      .about-body { grid-template-columns: 1fr; gap: 32px; }
+      .profile-meta { border-left: none; border-top: 1px solid var(--hairline); padding: 24px 0 0; }
+      .sec-head { grid-template-columns: 1fr; gap: 16px; margin-bottom: 32px; }
+      .sec-label { padding-top: 0; }
+      .contact-cta { padding: 36px 28px; }
+    }
+    @media (max-width: 540px) {
+      .kpi-grid, .services-grid, .process-grid, .principles, .stack-grid { grid-template-columns: 1fr; }
+      .kpi, .step { border-right: none; border-bottom: 1px solid var(--hairline); padding: 24px 0; }
+      .kpi:last-child, .step:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body data-theme="light">
+
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="monogram" aria-label="Adam Seong monogram">
+        <span class="ctr"></span>
+        <span class="cbr"></span>
+        <span class="a-letter">A</span>
+      </div>
+      <div class="brand-text">
+        <div class="name">Adam Seong</div>
+        <div class="role">AI Engineer</div>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-item active" href="#intro" data-target="intro"><span class="num">01</span><span class="label">Intro</span></a>
+      <a class="nav-item" href="#about" data-target="about"><span class="num">02</span><span class="label">About</span></a>
+      <a class="nav-item" href="#services" data-target="services"><span class="num">03</span><span class="label">Services</span></a>
+      <a class="nav-item" href="#projects" data-target="projects"><span class="num">04</span><span class="label">Projects</span></a>
+      <a class="nav-item" href="#process" data-target="process"><span class="num">05</span><span class="label">Process</span></a>
+      <a class="nav-item" href="#stack" data-target="stack"><span class="num">06</span><span class="label">Stack</span></a>
+      <a class="nav-item" href="#contact" data-target="contact"><span class="num">07</span><span class="label">Contact</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="meta-row"><span class="key">LOCATION</span><span class="val">SEOUL · KR</span></div>
+      <div class="meta-row"><span class="key">LOCAL TIME</span><span class="val" id="clock">--:--:--</span></div>
+      <div class="meta-row"><span class="key">STATUS</span><span class="val avail"><span class="avail-dot"></span>AVAILABLE · Q2</span></div>
+    </div>
+  </aside>
+
+  <!-- ===== Main ===== -->
+  <main class="main">
+
+    <!-- 01 Intro -->
+    <section class="section" id="intro">
+      <div class="intro-top">
+        <span class="dot"></span>
+        <span>8 SYSTEMS LIVE · UPDATED <span id="today-date">————</span></span>
+      </div>
+
+      <h1 class="headline">
+        반복되는 업무에<br>
+        들어가는 시간을<br>
+        <span class="underline-word">되돌려드립니다.<svg class="ul-svg" viewBox="0 0 400 12" preserveAspectRatio="none"><path d="M4 8 Q 80 2, 160 6 T 320 5 T 396 8" stroke="oklch(0.68 0.15 148)" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></span>
+      </h1>
+
+      <p class="sub">
+        업무 프로세스 자동화, LLM Agent 개발, 실시간 데이터 파이프라인, 클라우드 배포까지 —
+        데모가 아니라 실제 운영되는 시스템을 설계하고 만듭니다.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn" href="#contact">무료 진단 세션 예약 <span class="arr">→</span></a>
+        <a class="btn ghost" href="#projects">프로젝트 보기 <span class="arr">↓</span></a>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-val">40%+</div><div class="kpi-label">시간 절감</div></div>
+        <div class="kpi"><div class="kpi-val">8+</div><div class="kpi-label">프로덕션 에이전트</div></div>
+        <div class="kpi"><div class="kpi-val">24/7</div><div class="kpi-label">Live Operations</div></div>
+        <div class="kpi"><div class="kpi-val">100%</div><div class="kpi-label">HITL 안전</div></div>
+      </div>
+    </section>
+
+    <!-- 02 About -->
+    <section class="section" id="about">
+      <div class="sec-head">
+        <div class="sec-label">/ 02 · ABOUT</div>
+        <h2>운영되는 시스템을 <span class="muted-h">만드는 엔지니어.</span></h2>
+      </div>
+
+      <div class="about-body">
+        <div class="about-text">
+          <p>
+            서울에서 활동하는 AI 엔지니어입니다. 프로토타입에서 멈추지 않고,
+            실제 업무 흐름에 들어가 매일 돌아가는 시스템을 만드는 데 집중합니다.
+            LLM Agent 설계부터 데이터 파이프라인, 클라우드 배포와 운영까지
+            한 번에 책임지고 만듭니다.
+          </p>
+          <p>
+            제가 만드는 시스템은 관찰 가능성(observability)을 기본으로 합니다.
+            장애가 났을 때 어디에서 무엇이 멈췄는지 추적할 수 있어야 하고,
+            중요한 의사결정에는 사람이 개입할 수 있어야 한다고 믿습니다(Human-in-the-Loop).
+            데모에서는 화려해 보이지만 현장에서 깨지는 시스템을 많이 봐 왔기 때문입니다.
+          </p>
+          <p>
+            API 비용과 운영 비용을 설계 단계에서 먼저 따지고,
+            실패했을 때의 비용까지 계산에 넣습니다. 그래야 오래 돌아갑니다.
+          </p>
+        </div>
+
+        <div class="profile-meta">
+          <div class="pm-item"><div class="k">NAME</div><div class="v">Adam Seong</div></div>
+          <div class="pm-item"><div class="k">BASED IN</div><div class="v">Seoul, Republic of Korea</div></div>
+          <div class="pm-item"><div class="k">FOCUS</div><div class="v">LLM Agent · BPA · Data Pipeline · DevOps</div></div>
+          <div class="pm-item"><div class="k">AVAILABILITY</div><div class="v accent-text">Open — 2026 Q2 · 1–2팀</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Services -->
+    <section class="section" id="services">
+      <div class="sec-head">
+        <div class="sec-label">/ 03 · SERVICES</div>
+        <h2>네 가지 영역, <span class="muted-h">하나의 책임.</span></h2>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-head">
+            <span class="service-tag">BPA</span>
+            <div class="service-metric"><div class="v">40%+</div><div class="l">Time Saved</div></div>
+          </div>
+          <div class="service-title">업무 프로세스 자동화</div>
+          <div class="service-body">
+            반복되는 수작업을 식별하고, 메일 · 스프레드시트 · 내부 툴을 잇는
+            자동화 흐름을 만듭니다. 먼저 지표로 검증하고, 그 뒤에 코드를 붙입니다.
+          </div>
+          <ul class="service-bullets">
+            <li>업무 흐름 진단 &amp; ROI 추정</li>
+            <li>워크플로우 오케스트레이션</li>
+            <li>시트/메일/DB 통합</li>
+            <li>운영 대시보드 구축</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head">
+            <span class="service-tag">LLM</span>
+            <div class="service-metric"><div class="v">8+</div><div class="l">Agents Live</div></div>
+          </div>
+          <div class="service-title">LLM Agent 개발</div>
+          <div class="service-body">
+            Tool Use, Multi-step Reasoning, Memory를 갖춘 에이전트를 설계하고
+            운영합니다. LangGraph와 Claude Tool Use로 안정성과 제어 가능성을 동시에 잡습니다.
+          </div>
+          <ul class="service-bullets">
+            <li>LangGraph 기반 오케스트레이션</li>
+            <li>Tool Use · Function Calling</li>
+            <li>Human-in-the-Loop 안전장치</li>
+            <li>프롬프트 · 비용 최적화</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head">
+            <span class="service-tag">DAT</span>
+            <div class="service-metric"><div class="v">24/7</div><div class="l">Live Stream</div></div>
+          </div>
+          <div class="service-title">실시간 데이터 파이프라인</div>
+          <div class="service-body">
+            시장 데이터, API 이벤트, 내부 로그를 안정적으로 수집하고 처리합니다.
+            재시도, 백오프, 중복 제거를 기본으로 설계합니다.
+          </div>
+          <ul class="service-bullets">
+            <li>수집 · 적재 · 변환 파이프라인</li>
+            <li>비동기 처리 &amp; 큐잉</li>
+            <li>에러 복구 / 재시도 전략</li>
+            <li>실시간 지표 모니터링</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-head">
+            <span class="service-tag">OPS</span>
+            <div class="service-metric"><div class="v">E2E</div><div class="l">Delivery</div></div>
+          </div>
+          <div class="service-title">클라우드 배포 &amp; DevOps</div>
+          <div class="service-body">
+            AWS EC2, 컨테이너, 배포 스크립트까지. 코드만 넘기는 게 아니라,
+            관찰 가능하고 회복 가능한 운영 환경을 함께 넘겨드립니다.
+          </div>
+          <ul class="service-bullets">
+            <li>AWS / 클라우드 인프라 구축</li>
+            <li>배포 자동화 · 무중단 배포</li>
+            <li>로깅 · 알림 · 관찰 가능성</li>
+            <li>비용 · 보안 거버넌스</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Projects -->
+    <section class="section" id="projects">
+      <div class="sec-head">
+        <div class="sec-label">/ 04 · PROJECTS</div>
+        <h2>현재 운영 중인 <span class="muted-h">시스템들.</span></h2>
+      </div>
+
+      <div class="projects">
+        <div class="project">
+          <div class="project-code">
+            <span class="code-id">P01</span>
+            <span class="live">● LIVE</span>
+            <span class="since">since 2025.10</span>
+          </div>
+          <div>
+            <div class="project-title">AI Sales Automation</div>
+            <div class="project-tags">기업 B2B · LangGraph Agent · Outbound Pipeline</div>
+            <div class="project-desc">
+              잠재 고객 리서치부터 개인화된 메일 작성, 발송, 회신 분류까지
+              엔드투엔드로 자동화한 세일즈 에이전트. LangGraph로 단계별 제어하고,
+              발송 전 HITL 검토 단계를 두어 안전하게 운영합니다.
+            </div>
+            <div class="chips">
+              <span class="chip">LangGraph</span>
+              <span class="chip">Gemini</span>
+              <span class="chip">SendGrid</span>
+              <span class="chip">Flask</span>
+              <span class="chip">AWS EC2</span>
+            </div>
+          </div>
+          <div class="project-impact">
+            <span class="k">IMPACT</span>
+            <span class="v">리드 처리 시간 ▼ 70%</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <div class="project-code">
+            <span class="code-id">P02</span>
+            <span class="live">● LIVE</span>
+            <span class="since">since 2025.08</span>
+          </div>
+          <div>
+            <div class="project-title">Jarvis AI Assistant</div>
+            <div class="project-tags">개인 생산성 · Claude Tool Use · Async Scheduling</div>
+            <div class="project-desc">
+              일정, 메일, 파일을 연결해 작업을 실행하는 개인 어시스턴트.
+              Claude의 Tool Use로 외부 API를 안전하게 호출하고,
+              비동기 실행과 로컬 SQLite 기반 영속 메모리로 맥락을 유지합니다.
+            </div>
+            <div class="chips">
+              <span class="chip">Claude API</span>
+              <span class="chip">Tool Use</span>
+              <span class="chip">Async Python</span>
+              <span class="chip">SQLite</span>
+            </div>
+          </div>
+          <div class="project-impact">
+            <span class="k">IMPACT</span>
+            <span class="v">일일 작업 ▼ 2h</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <div class="project-code">
+            <span class="code-id">P03</span>
+            <span class="live">● LIVE</span>
+            <span class="since">since 2025.11</span>
+          </div>
+          <div>
+            <div class="project-title">AI Trading System</div>
+            <div class="project-tags">실시간 시그널 · 리스크 관리 · Multi-Broker</div>
+            <div class="project-desc">
+              Upbit, KIS API에서 실시간 시세를 받아 Gemini 기반 전략 엔진으로
+              시그널을 생성하고, 리스크 한도 안에서 주문을 실행합니다.
+              체결 · 손익 알림은 텔레그램으로 즉시 전달됩니다.
+            </div>
+            <div class="chips">
+              <span class="chip">Gemini</span>
+              <span class="chip">Upbit API</span>
+              <span class="chip">KIS API</span>
+              <span class="chip">Telegram Bot</span>
+            </div>
+          </div>
+          <div class="project-impact">
+            <span class="k">IMPACT</span>
+            <span class="v">시그널 지연 ▼ 90%</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <div class="project-code">
+            <span class="code-id">P04</span>
+            <span class="live">● LIVE</span>
+            <span class="since">since 2025.06</span>
+          </div>
+          <div>
+            <div class="project-title">Nail Shop Budget Dashboard</div>
+            <div class="project-tags">소상공인 · 실시간 가계부 · Streamlit</div>
+            <div class="project-desc">
+              네일샵 매출/지출을 Google Sheets에서 읽어 월간 손익과 카테고리별
+              지출을 시각화하는 대시보드. 사장님이 매일 한 번 확인하면
+              현금 흐름이 보이게 만들었습니다.
+            </div>
+            <div class="chips">
+              <span class="chip">Streamlit</span>
+              <span class="chip">Google Sheets</span>
+              <span class="chip">Plotly</span>
+              <span class="chip">pandas</span>
+            </div>
+          </div>
+          <div class="project-impact">
+            <span class="k">IMPACT</span>
+            <span class="v">월 마감 시간 ▼ 80%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Process -->
+    <section class="section" id="process">
+      <div class="sec-head">
+        <div class="sec-label">/ 05 · PROCESS</div>
+        <h2>진단 · 설계 · 구현 · <span class="muted-h">그리고 계속 운영.</span></h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="step">
+          <div class="step-num">01 · DIAGNOSE</div>
+          <div class="step-title">진단</div>
+          <div class="step-dur">1 DAY</div>
+          <div class="step-body">
+            무엇이 반복되고, 어디서 시간이 새고 있는지 같이 찾습니다.
+            자동화가 오히려 독이 되는 지점도 솔직하게 말씀드립니다.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02 · DESIGN</div>
+          <div class="step-title">설계</div>
+          <div class="step-dur">1 WEEK</div>
+          <div class="step-body">
+            기술 스택, 비용 구조, 실패 모드, HITL 지점까지 한 장의
+            아키텍처로 정리해 합의합니다. 구현 전에 맞추는 게 가장 쌉니다.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03 · BUILD</div>
+          <div class="step-title">구현</div>
+          <div class="step-dur">2–4 WEEKS</div>
+          <div class="step-body">
+            운영 환경에 맞춰 코드를 작성하고, 배포 · 로깅 · 알림까지
+            세팅합니다. 매주 데모로 진행 상황을 공유합니다.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">04 · OPERATE</div>
+          <div class="step-title">운영</div>
+          <div class="step-dur">ONGOING</div>
+          <div class="step-body">
+            넘기고 끝이 아니라, 모니터링 · 인수인계 · 개선 지원을
+            이어갑니다. 필요하면 유지보수 계약으로 전환합니다.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Stack -->
+    <section class="section" id="stack">
+      <div class="sec-head">
+        <div class="sec-label">/ 06 · STACK</div>
+        <h2>검증된 도구만, <span class="muted-h">운영에 맞춰.</span></h2>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-cat">
+          <h4>AI / LLM</h4>
+          <ul class="stack-list">
+            <li>Claude API (Sonnet / Opus)</li>
+            <li>Google Gemini</li>
+            <li>OpenAI API</li>
+            <li>LangGraph</li>
+            <li>Tool Use / Function Calling</li>
+          </ul>
+        </div>
+        <div class="stack-cat">
+          <h4>Languages</h4>
+          <ul class="stack-list">
+            <li>Python 3.11+</li>
+            <li>JavaScript / TypeScript</li>
+            <li>SQL (PostgreSQL · SQLite)</li>
+            <li>Bash / Shell</li>
+          </ul>
+        </div>
+        <div class="stack-cat">
+          <h4>Data</h4>
+          <ul class="stack-list">
+            <li>pandas · NumPy</li>
+            <li>Plotly · Streamlit</li>
+            <li>Google Sheets API</li>
+            <li>SQLite · PostgreSQL</li>
+          </ul>
+        </div>
+        <div class="stack-cat">
+          <h4>Infra</h4>
+          <ul class="stack-list">
+            <li>AWS EC2 · S3</li>
+            <li>Docker</li>
+            <li>Nginx · systemd</li>
+            <li>GitHub Actions</li>
+          </ul>
+        </div>
+        <div class="stack-cat">
+          <h4>Backend</h4>
+          <ul class="stack-list">
+            <li>Flask · FastAPI</li>
+            <li>Async Python (asyncio)</li>
+            <li>REST · Webhooks</li>
+            <li>Queue / Scheduler</li>
+          </ul>
+        </div>
+        <div class="stack-cat">
+          <h4>Integrations</h4>
+          <ul class="stack-list">
+            <li>SendGrid · Gmail API</li>
+            <li>Telegram Bot API</li>
+            <li>Upbit · KIS 금융 API</li>
+            <li>Slack · Notion API</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 Contact -->
+    <section class="section" id="contact">
+      <div class="sec-head">
+        <div class="sec-label">/ 07 · CONTACT</div>
+        <h2>프로젝트 한 번, <span class="muted-h">대화부터.</span></h2>
+      </div>
+
+      <div class="contact-cta">
+        <h3>반복 업무의 구조를 함께 풀어볼까요?<br>30분 무료 진단 세션부터 시작합니다.</h3>
+        <div class="contact-btns">
+          <a class="btn" href="mailto:giha1205@gmail.com?subject=[AI%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8]%20%EB%AC%B4%EB%A3%8C%20%EC%A7%84%EB%8B%A8%20%EC%84%B8%EC%85%98%20%EC%98%88%EC%95%BD">무료 진단 세션 예약 <span class="arr">→</span></a>
+          <a class="btn ghost" href="mailto:giha1205@gmail.com?subject=[%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%A0%9C%EC%95%88]%20">이메일로 프로젝트 제안하기 <span class="arr">✉</span></a>
+        </div>
+        <div class="contact-meta">
+          첫 답변 24시간 이내 &nbsp;·&nbsp; 진단 세션 무료 &nbsp;·&nbsp; 2026 Q2 &nbsp;·&nbsp; 1–2팀 의뢰 가능
+        </div>
+      </div>
+
+      <div class="faq">
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span>작은 규모의 프로젝트도 가능한가요?</span>
+            <span class="plus">+</span>
+          </button>
+          <div class="faq-a">
+            네. 1인 창업자, 소규모 팀의 자동화도 다수 진행해왔습니다.
+            규모보다는 ‘반복되는 비용이 명확한 업무인지’를 먼저 봅니다.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span>비용은 어떻게 책정되나요?</span>
+            <span class="plus">+</span>
+          </button>
+          <div class="faq-a">
+            30분 무료 진단 후, 범위와 난이도에 따라 고정가 또는 주간 단위로 제안드립니다.
+            설계 단계에서 총 비용과 운영비(API/서버)를 명시해 합의합니다.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span>AI API 비용은 누가 부담하나요?</span>
+            <span class="plus">+</span>
+          </button>
+          <div class="faq-a">
+            운영 중 발생하는 API 비용은 클라이언트 측 계정에서 직접 청구되도록 구성합니다.
+            개발 중 테스트 비용은 제 측 크레딧으로 처리합니다.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">
+            <span>납품 후 유지보수는 되나요?</span>
+            <span class="plus">+</span>
+          </button>
+          <div class="faq-a">
+            월 단위 유지보수 옵션이 있습니다. 장애 대응, 모델 업데이트,
+            기능 추가까지 시간 단위로 투명하게 과금합니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="principles">
+        <div class="principle">
+          <div class="num">/ 01</div>
+          <div class="t">데모가 아니라 운영</div>
+          <div class="b">발표 자리의 결과물이 아니라, 매일 돌아가는 시스템을 목표로 만듭니다.</div>
+        </div>
+        <div class="principle">
+          <div class="num">/ 02</div>
+          <div class="t">관찰 가능성 우선</div>
+          <div class="b">로그 · 지표 · 알림을 먼저 설계합니다. 보이지 않는 시스템은 고칠 수도 없습니다.</div>
+        </div>
+        <div class="principle">
+          <div class="num">/ 03</div>
+          <div class="t">HITL로 신뢰</div>
+          <div class="b">중요한 결정에는 사람이 개입할 여지를 남깁니다. 자동화의 속도보다 신뢰가 먼저입니다.</div>
+        </div>
+        <div class="principle">
+          <div class="num">/ 04</div>
+          <div class="t">비용을 먼저 설계</div>
+          <div class="b">API · 인프라 · 실패 비용을 설계 단계에서 계산합니다. 그래야 오래 돌아갑니다.</div>
+        </div>
+      </div>
+
+      <div class="download-cta">
+        <div class="download-cta-text">
+          <span class="label">/ PORTFOLIO · PDF</span>
+          <span class="title">해당 포트폴리오 직접 받아보기</span>
+          <span class="meta">Adam_AI_Portfolio_final.pdf · 한국어</span>
+        </div>
+        <a class="dl-btn" href="Adam_AI_Portfolio_final.pdf" download="Adam_AI_Portfolio.pdf">
+          PDF 다운로드 <span class="arr">↓</span>
+        </a>
+      </div>
+
+      <footer>
+        <div>© 2026 Adam Seong · All rights reserved</div>
+        <div class="social">
+          <a href="https://github.com/" target="_blank" rel="noopener">GITHUB ↗</a>
+          <a href="mailto:giha1205@gmail.com">EMAIL ↗</a>
+          <a href="Adam_AI_Portfolio_final.pdf" download="Adam_AI_Portfolio.pdf">PDF ↓</a>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Theme toggle -->
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+    <span class="dot-tt"></span>
+    <span id="themeLabel">DARK</span>
+  </button>
+
+  <script>
+    /* ==========================================================================
+       Portfolio runtime — Vanilla JavaScript
+       --------------------------------------------------------------------------
+       깜박임(flicker) 방지 전략
+         · React/Vue 없이 vanilla JS만 사용. DOM은 페이지 로드 시 한 번만 렌더.
+         · 섹션 active 상태 변화는 class만 토글 (innerHTML 재작성 없음).
+         · 시계(setInterval)는 textContent만 1초마다 교체 (주변 DOM 영향 없음).
+         → 스크롤/탭 이동 시 콘텐츠가 재마운트되어 깜박이는 상황이 구조적으로 불가.
+
+       초기화 순서
+         1) initClock     — 실시간 시계
+         2) initDate      — 헤드라인 상단 날짜
+         3) smooth scroll — 사이드바 네비 클릭 핸들러
+         4) initScrollSpy — IntersectionObserver로 현재 섹션 추적
+         5) FAQ accordion — 접기/펼치기
+         6) initTheme     — 라이트/다크 토글 (OS 선호 초기 반영)
+       ========================================================================== */
+
+    // ----- 1) 실시간 시계 -------------------------------------------------------
+    // 페이지 전체 재렌더 없이 #clock 엘리먼트의 텍스트만 1초마다 교체.
+    // tabular-nums 폰트 설정과 결합되어 숫자 폭이 고정 → 깜박임 없음.
+    (function initClock() {
+      var el = document.getElementById('clock');
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+      function tick() {
+        var now = new Date();
+        var hh = pad(now.getHours());
+        var mm = pad(now.getMinutes());
+        var ss = pad(now.getSeconds());
+        el.textContent = hh + ':' + mm + ':' + ss + ' KST';
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+
+    // ----- 2) 오늘 날짜 (Intro 상단 "UPDATED ..." 영역) -------------------------
+    // 사이트가 항상 "최신"으로 보이도록 페이지 로드 시점의 날짜를 주입.
+    (function initDate() {
+      var el = document.getElementById('today-date');
+      var now = new Date();
+      var y = now.getFullYear();
+      var m = ('0' + (now.getMonth() + 1)).slice(-2);
+      var d = ('0' + now.getDate()).slice(-2);
+      el.textContent = y + '.' + m + '.' + d;
+    })();
+
+    // ----- 3) Smooth scroll (사이드바 네비 클릭) --------------------------------
+    // 앵커 기본 동작을 가로채서 scrollIntoView로 부드럽게 이동.
+    // history.replaceState로 URL은 업데이트하되 히스토리 스택은 오염시키지 않음.
+    document.querySelectorAll('.nav-item').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var href = a.getAttribute('href');
+        if (!href || href.charAt(0) !== '#') return;
+        e.preventDefault();
+        var target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', href);
+        }
+      });
+    });
+
+    // ----- 4) 스크롤 스파이 (IntersectionObserver) ------------------------------
+    // 스크롤 이벤트 대신 IntersectionObserver 사용 → 메인 스레드 부하 최소화.
+    // 섹션이 뷰포트의 35% 이상 보이는 순간부터 active로 간주.
+    // 여러 섹션이 걸쳐 있으면 가장 많이 보이는 섹션(bestRatio)을 선택.
+    (function initScrollSpy() {
+      var navItems = document.querySelectorAll('.nav-item');
+      var sections = document.querySelectorAll('.section');
+      var lastActive = 'intro';
+
+      function setActive(id) {
+        if (id === lastActive) return;
+        lastActive = id;
+        navItems.forEach(function (n) {
+          if (n.getAttribute('data-target') === id) n.classList.add('active');
+          else n.classList.remove('active');
+        });
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        // 가장 많이 보이는 섹션을 active로
+        var best = null;
+        var bestRatio = 0;
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && entry.intersectionRatio > bestRatio) {
+            bestRatio = entry.intersectionRatio;
+            best = entry.target;
+          }
+        });
+        if (best && bestRatio >= 0.35) {
+          setActive(best.id);
+        }
+      }, {
+        threshold: [0.35, 0.5, 0.75],
+        rootMargin: '-10% 0px -40% 0px'
+      });
+
+      sections.forEach(function (s) { observer.observe(s); });
+    })();
+
+    // ----- 5) FAQ 아코디언 ------------------------------------------------------
+    // 각 질문 버튼을 클릭하면 부모 .faq-item에 .open 클래스 토글.
+    // 펼침/접힘 애니메이션은 CSS의 max-height + transition으로 처리.
+    document.querySelectorAll('.faq-q').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item = btn.parentElement;
+        item.classList.toggle('open');
+      });
+    });
+
+    // ----- 6) 라이트/다크 테마 토글 ---------------------------------------------
+    // 초기값: 사용자 OS 선호(prefers-color-scheme) 반영.
+    // 수동 토글 시에는 data-theme 속성만 갈아끼우고 CSS 변수가 전체를 갱신.
+    // (localStorage 저장은 의도적으로 생략 — 방문할 때마다 OS 기본을 따른다.)
+    (function initTheme() {
+      var body = document.body;
+      var btn = document.getElementById('themeToggle');
+      var label = document.getElementById('themeLabel');
+      function apply(theme) {
+        body.setAttribute('data-theme', theme);
+        label.textContent = theme === 'dark' ? 'LIGHT' : 'DARK';
+      }
+      // 저장된 설정 없이 OS 선호 반영
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      apply(prefersDark ? 'dark' : 'light');
+      btn.addEventListener('click', function () {
+        var current = body.getAttribute('data-theme');
+        apply(current === 'dark' ? 'light' : 'dark');
+      });
+    })();
+  </script>
+</body>
+</html>
