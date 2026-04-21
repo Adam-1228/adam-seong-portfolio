@@ -1,0 +1,8 @@
+# robots.txt for Adam Seong Portfolio
+# https://adam-1228.github.io/adam-seong-portfolio/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://adam-1228.github.io/adam-seong-portfolio/sitemap.xml
