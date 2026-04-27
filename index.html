@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
@@ -787,6 +787,159 @@ function V2Monogram({ dark, lang }) {
                   </div>
                 </Anim>
               ); })}
+            </div>
+          </section>
+
+          {/* ============================================================ */}
+          {/* 07.5 PRODUCTS — Live Software (zip 다운로드)                */}
+          {/* ============================================================ */}
+          <section id="v2-products" style={{
+            padding: '140px 72px 100px',
+            background: bg,
+            color: fg,
+            borderTop: `1px solid ${hairline}`
+          }}>
+            <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+              <div style={{
+                fontSize: '12px',
+                letterSpacing: '0.16em',
+                textTransform: 'uppercase',
+                opacity: 0.5,
+                marginBottom: '16px',
+                fontFamily: "'Inter Tight', Inter, system-ui, sans-serif"
+              }}>
+                / Products
+              </div>
+              <h2 style={{
+                fontSize: 'clamp(32px, 5vw, 56px)',
+                fontWeight: 500,
+                letterSpacing: '-0.02em',
+                margin: '0 0 48px',
+                fontFamily: "'Inter Tight', Inter, system-ui, sans-serif",
+                lineHeight: 1.1
+              }}>
+                Live Software
+              </h2>
+              <article style={{
+                border: `1px solid ${hairline}`,
+                borderRadius: '4px',
+                padding: '40px',
+                maxWidth: '900px',
+                transition: 'border-color 0.2s ease'
+              }}>
+                <header style={{
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  justifyContent: 'space-between',
+                  gap: '16px',
+                  flexWrap: 'wrap',
+                  marginBottom: '20px'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
+                    <span aria-hidden="true" style={{
+                      width: '10px',
+                      height: '10px',
+                      borderRadius: '50%',
+                      background: accent,
+                      boxShadow: `0 0 0 5px ${accent}29`,
+                      display: 'inline-block'
+                    }}></span>
+                    <h3 style={{
+                      fontSize: '28px',
+                      fontWeight: 500,
+                      margin: 0,
+                      letterSpacing: '-0.01em',
+                      fontFamily: "'Inter Tight', Inter, system-ui, sans-serif"
+                    }}>
+                      주식 자동매매
+                    </h3>
+                  </div>
+                  <span style={{
+                    fontFamily: "ui-monospace, 'JetBrains Mono', 'SF Mono', monospace",
+                    fontSize: '12px',
+                    padding: '5px 12px',
+                    border: `1px solid ${hairline}`,
+                    borderRadius: '999px',
+                    opacity: 0.85
+                  }}>
+                    v1.4.0
+                  </span>
+                </header>
+                <p style={{
+                  fontSize: '16px',
+                  lineHeight: 1.7,
+                  opacity: 0.8,
+                  margin: '0 0 28px',
+                  maxWidth: '720px'
+                }}>
+                  한국 증권사 OpenAPI 연동 데스크톱 자동매매 클라이언트. 매매 전략 자동 실행, 실시간 시세 모니터링, 주문 자동화 + 거래 로그 관리를 한 화면에서 제공합니다.
+                </p>
+                <ul style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '8px',
+                  margin: '0 0 36px',
+                  padding: 0,
+                  listStyle: 'none'
+                }}>
+                  {['Windows 10/11', '64-bit', '증권사 OpenAPI', 'Desktop'].map(function(tag) { return (
+                    <li key={tag} style={{
+                      fontFamily: "ui-monospace, 'JetBrains Mono', 'SF Mono', monospace",
+                      fontSize: '12px',
+                      padding: '6px 12px',
+                      background: `${fg}0a`,
+                      borderRadius: '4px'
+                    }}>
+                      {tag}
+                    </li>
+                  ); })}
+                </ul>
+                <a
+                  href="https://github.com/Adam-1228/adam-seong-portfolio/releases/download/v1.4.0/adam-trader-v1.4.0.zip"
+                  download
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '14px',
+                    padding: '16px 28px',
+                    background: fg,
+                    color: bg,
+                    textDecoration: 'none',
+                    borderRadius: '999px',
+                    fontSize: '14px',
+                    fontWeight: 500,
+                    fontFamily: "'Inter Tight', Inter, system-ui, sans-serif",
+                    transition: 'transform 0.15s ease, background 0.15s ease',
+                    cursor: 'pointer'
+                  }}
+                  onMouseEnter={function(e) {
+                    e.currentTarget.style.background = accent;
+                    e.currentTarget.style.transform = 'translateY(-1px)';
+                  }}
+                  onMouseLeave={function(e) {
+                    e.currentTarget.style.background = fg;
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  30일 무료 평가판 다운로드 ↓
+                  <span style={{
+                    fontSize: '12px',
+                    opacity: 0.6,
+                    fontFamily: 'ui-monospace, monospace'
+                  }}>
+                    155 MB · ZIP
+                  </span>
+                </a>
+                <p style={{
+                  fontSize: '12px',
+                  lineHeight: 1.65,
+                  opacity: 0.55,
+                  margin: '28px 0 0',
+                  maxWidth: '640px'
+                }}>
+                  ⚠ 투자 판단과 손익 책임은 사용자 본인에게 있습니다. 본 소프트웨어는 매매 전략 실행을 돕는 도구이며, 수익 또는 손실을 보장하지 않습니다. 30일 평가 후 정식 라이선스 문의는 이메일로 연락 부탁드립니다.
+                </p>
+              </article>
             </div>
           </section>
 
