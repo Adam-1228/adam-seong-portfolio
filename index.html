@@ -851,7 +851,7 @@ function V2Monogram({ dark, lang }) {
                       letterSpacing: '-0.01em',
                       fontFamily: "'Inter Tight', Inter, system-ui, sans-serif"
                     }}>
-                      주식 자동매매
+                      {lang === 'ko' ? '주식 자동매매' : 'Stock Auto-Trader'}
                     </h3>
                   </div>
                   <span style={{
@@ -872,7 +872,7 @@ function V2Monogram({ dark, lang }) {
                   margin: '0 0 28px',
                   maxWidth: '720px'
                 }}>
-                  한국 증권사 OpenAPI 연동 데스크톱 자동매매 클라이언트. 매매 전략 자동 실행, 실시간 시세 모니터링, 주문 자동화 + 거래 로그 관리를 한 화면에서 제공합니다.
+                  {lang === 'ko' ? '한국 증권사 OpenAPI 연동 데스크톱 자동매매 클라이언트. 매매 전략 자동 실행, 실시간 시세 모니터링, 주문 자동화 + 거래 로그 관리를 한 화면에서 제공합니다.' : 'Desktop auto-trading client integrated with Korean broker OpenAPIs. Runs trading strategies automatically, monitors real-time market data, and automates orders with full trade-log management — all in a single screen.'}
                 </p>
                 <ul style={{
                   display: 'flex',
@@ -882,7 +882,7 @@ function V2Monogram({ dark, lang }) {
                   padding: 0,
                   listStyle: 'none'
                 }}>
-                  {['Windows 10/11', '64-bit', '증권사 OpenAPI', 'Desktop'].map(function(tag) { return (
+                  {['Windows 10/11', '64-bit', (lang === 'ko' ? '증권사 OpenAPI' : 'Broker OpenAPI'), 'Desktop'].map(function(tag) { return (
                     <li key={tag} style={{
                       fontFamily: "ui-monospace, 'JetBrains Mono', 'SF Mono', monospace",
                       fontSize: '12px',
@@ -921,7 +921,7 @@ function V2Monogram({ dark, lang }) {
                     e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
-                  30일 무료 평가판 다운로드 ↓
+                  {lang === 'ko' ? '30일 무료 평가판 다운로드 ↓' : 'Download 30-day free trial ↓'}
                   <span style={{
                     fontSize: '12px',
                     opacity: 0.6,
@@ -937,7 +937,7 @@ function V2Monogram({ dark, lang }) {
                   margin: '28px 0 0',
                   maxWidth: '640px'
                 }}>
-                  ⚠ 투자 판단과 손익 책임은 사용자 본인에게 있습니다. 본 소프트웨어는 매매 전략 실행을 돕는 도구이며, 수익 또는 손실을 보장하지 않습니다. 30일 평가 후 정식 라이선스 문의는 이메일로 연락 부탁드립니다.
+                  {lang === 'ko' ? '⚠ 투자 판단과 손익 책임은 사용자 본인에게 있습니다. 본 소프트웨어는 매매 전략 실행을 돕는 도구이며, 수익 또는 손실을 보장하지 않습니다. 30일 평가 후 정식 라이선스 문의는 이메일로 연락 부탁드립니다.' : '⚠ All investment decisions and the resulting profits or losses are your own responsibility. This software is a tool that helps execute trading strategies and does not guarantee any returns. After the 30-day trial, please contact us by email for a full license.'}
                 </p>
               </article>
             </div>
