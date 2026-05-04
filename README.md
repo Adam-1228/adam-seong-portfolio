@@ -21,6 +21,15 @@
 
 ---
 
+## AutoTrader 릴리즈 기록
+
+이 저장소는 포트폴리오 사이트와 함께 AutoTrader 배포 파일도 GitHub Releases로 관리합니다.
+버전별 업데이트 내역은 [AutoTrader Release History](docs/auto-trader-release-history.md)에서 확인할 수 있습니다.
+
+최신 배포 버전: `v2.0.1`
+
+---
+
 ## 설계 원칙
 
 1. **데모가 아니라 운영** — 실제 사용자 환경에서 안정적으로 돌아가는 코드만 남깁니다.
