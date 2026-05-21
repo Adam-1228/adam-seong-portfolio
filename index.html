@@ -45,6 +45,9 @@
     .v2-stack-grid { grid-template-columns: 1fr 1fr !important; }
     .v2-process-grid { grid-template-columns: 1fr 1fr !important; }
     .v2-stats-grid { grid-template-columns: 1fr 1fr !important; }
+    .v2-local-proof { grid-template-columns: 1fr 1fr !important; }
+    .v2-local-packages { grid-template-columns: 1fr !important; }
+    .v2-local-workflow { grid-template-columns: 1fr !important; }
     .v2-project-row { grid-template-columns: 1fr !important; gap: 12px !important; }
     .v2-contact-meta { grid-template-columns: 1fr 1fr !important; }
     .v2-principles-grid { grid-template-columns: 1fr !important; }
@@ -68,10 +71,11 @@ const V2_I18N = {
       { id: 'intro', num: '01', label: 'Intro' },
       { id: 'about', num: '02', label: 'About' },
       { id: 'services', num: '03', label: 'Services' },
-      { id: 'projects', num: '04', label: 'Projects' },
-      { id: 'process', num: '05', label: 'Process' },
-      { id: 'stack', num: '06', label: 'Stack' },
-      { id: 'contact', num: '07', label: 'Contact' },
+      { id: 'localAi', num: '04', label: 'Local AI' },
+      { id: 'projects', num: '05', label: 'Projects' },
+      { id: 'process', num: '06', label: 'Process' },
+      { id: 'stack', num: '07', label: 'Stack' },
+      { id: 'contact', num: '08', label: 'Contact' },
     ],
     intro: {
       badge: '8 SYSTEMS LIVE \u00b7 UPDATED',
@@ -80,7 +84,7 @@ const V2_I18N = {
       hl3: '\ub418\ub3cc\ub824\ub4dc\ub9bd\ub2c8\ub2e4',
       lead: ['AI \uc5d4\uc9c0\ub2c8\uc5b4 ', 'Adam Seong', '\uc785\ub2c8\ub2e4. LLM \uc5d0\uc774\uc804\ud2b8\u00b7\uc2e4\uc2dc\uac04 \ub370\uc774\ud130 \ud30c\uc774\ud504\ub77c\uc778\u00b7\ud074\ub77c\uc6b0\ub4dc \ubc30\ud3ec\ub97c \ud1b5\ud574 \uae30\uc5c5 \uc6b4\uc601\uc5d0 \uae4a\uac8c \uc2a4\uba70\ub4dc\ub294 ', '\uc2e4\uc0ac\uc6a9 \uc2dc\uc2a4\ud15c', '\uc744 \ub9cc\ub4ed\ub2c8\ub2e4. \ub370\ubaa8\ub85c \ub05d\ub098\uc9c0 \uc54a\ub294, \ub9e4\uc77c \ub3cc\uc544\uac00\uba70 \uc2dc\uac04\uc744 \uc544\ub07c\ub294 \uc81c\ud488.'],
       ctaPrimary: '\ubb34\ub8cc \uc9c4\ub2e8 \uc138\uc158 \uc608\uc57d\ud558\uae30',
-      ctaSecondary: '\uc6b4\uc601 \uc911\uc778 \ud504\ub85c\uc81d\ud2b8 \ubcf4\uae30 \u2192',
+      ctaSecondary: 'Local AI \ud328\ud0a4\uc9c0 \ubcf4\uae30 \u2192',
       meta: ['\uccab \ub2f5\ubcc0 ', '24\uc2dc\uac04 \uc774\ub0b4', ' \u00b7 \uc9c4\ub2e8 \uc138\uc158 ', '\ubb34\ub8cc'],
       stats: [
         { k: '40%+', v: '\uc5c5\ubb34 \uc2dc\uac04 \uc808\uac10' },
@@ -122,6 +126,47 @@ const V2_I18N = {
           body: 'AWS EC2\uc640 Docker Compose \uae30\ubc18 \ud504\ub85c\ub355\uc158 \ubc30\ud3ec\ubd80\ud130 CI/CD, \ubaa8\ub2c8\ud130\ub9c1\uae4c\uc9c0 end-to-end\ub85c \ucc45\uc784\uc9d1\ub2c8\ub2e4.',
           bullets: ['AWS EC2 \u00b7 Docker Compose', 'GitHub Actions CI/CD', '\ub85c\uadf8 \u00b7 \ud5ec\uc2a4\uccb4\ud06c \ubaa8\ub2c8\ud130\ub9c1'] },
       ],
+    },
+    localAi: {
+      kicker: 'LOCAL AI GROWTH',
+      hl1: '소상공인을 위한',
+      hl2: 'AI 운영 자동화 패키지.',
+      lead: '네이버 플레이스, 리뷰 답변, 블로그 초안, 이벤트 문구, 고객문의 정리를 매주 대신 처리합니다. 사장님은 현장 운영에 집중하고, 반복되는 온라인 업무는 AI 에이전트가 정리합니다.',
+      proof: [
+        { k: '1주', v: '첫 진단 리포트' },
+        { k: '12개', v: '월간 콘텐츠 초안' },
+        { k: '24h', v: '문의 응답 목표' },
+        { k: '월 30만원~', v: '파일럿 시작가' },
+      ],
+      packages: [
+        {
+          name: 'Starter',
+          price: '월 30만원',
+          tag: '처음 시작',
+          body: '리뷰 답변과 플레이스 개선 리포트부터 가볍게 시작합니다.',
+          items: ['리뷰 답변 초안 주 2회', '네이버 플레이스 개선 체크리스트', '월 4개 블로그 초안', '월간 실행 리포트']
+        },
+        {
+          name: 'Growth',
+          price: '월 70만원',
+          tag: '추천',
+          body: '검색 노출과 재방문을 함께 챙기는 운영형 패키지입니다.',
+          items: ['월 12개 블로그/인스타 초안', '리뷰 불만/칭찬 요약', '이벤트 문구와 이미지 콘셉트', '경쟁 매장 3곳 비교 리포트']
+        },
+        {
+          name: 'Automation',
+          price: '별도 견적',
+          tag: '시스템 구축',
+          body: '반복 문의와 예약/정산 업무까지 자동화합니다.',
+          items: ['카카오/이메일 문의 답변 봇', 'Google Sheets 운영 대시보드', '주간 자동 리포트', '업종별 FAQ 지식베이스']
+        },
+      ],
+      workflow: [
+        { n: '01', t: '무료 진단', b: '플레이스와 기존 콘텐츠를 보고 바로 고칠 지점을 5개로 정리합니다.' },
+        { n: '02', t: '파일럿', b: '2주 동안 리뷰 답변, 블로그 초안, 이벤트 문구를 실제로 납품합니다.' },
+        { n: '03', t: '월 운영', b: '효과가 보이는 항목만 남겨 매주 반복 가능한 운영 루틴으로 만듭니다.' },
+      ],
+      cta: '소상공인 AI 운영 무료 진단 요청'
     },
     projects: {
       kicker: 'PROJECTS', hl1: '\ud604\uc7ac \uc6b4\uc601 \uc911\uc778 \uc2dc\uc2a4\ud15c.',
@@ -199,10 +244,11 @@ const V2_I18N = {
       { id: 'intro', num: '01', label: 'Intro' },
       { id: 'about', num: '02', label: 'About' },
       { id: 'services', num: '03', label: 'Services' },
-      { id: 'projects', num: '04', label: 'Projects' },
-      { id: 'process', num: '05', label: 'Process' },
-      { id: 'stack', num: '06', label: 'Stack' },
-      { id: 'contact', num: '07', label: 'Contact' },
+      { id: 'localAi', num: '04', label: 'Local AI' },
+      { id: 'projects', num: '05', label: 'Projects' },
+      { id: 'process', num: '06', label: 'Process' },
+      { id: 'stack', num: '07', label: 'Stack' },
+      { id: 'contact', num: '08', label: 'Contact' },
     ],
     intro: {
       badge: '8 SYSTEMS LIVE \u00b7 UPDATED',
@@ -211,7 +257,7 @@ const V2_I18N = {
       hl3: 'repetitive work',
       lead: ['I\'m ', 'Adam Seong', ', an AI engineer building ', 'real, running systems', ' with LLM agents, real-time data pipelines, and cloud deployment. Not demos \u2014 products that run every day and save time.'],
       ctaPrimary: 'Book a free discovery call',
-      ctaSecondary: 'See live projects \u2192',
+      ctaSecondary: 'See local AI package \u2192',
       meta: ['First reply ', 'within 24h', ' \u00b7 Discovery call ', 'free'],
       stats: [
         { k: '40%+', v: 'Hours saved' },
@@ -253,6 +299,47 @@ const V2_I18N = {
           body: 'AWS EC2 + Docker Compose production deployment, CI/CD pipelines, monitoring \u2014 owned end to end.',
           bullets: ['AWS EC2 \u00b7 Docker Compose', 'GitHub Actions CI/CD', 'Logs \u00b7 healthcheck monitoring'] },
       ],
+    },
+    localAi: {
+      kicker: 'LOCAL AI GROWTH',
+      hl1: 'AI operations for',
+      hl2: 'local businesses.',
+      lead: 'Weekly support for Naver Place, review replies, blog drafts, promo copy, and customer-question handling. Owners stay focused on the floor while agents keep the online work moving.',
+      proof: [
+        { k: '1 week', v: 'First audit report' },
+        { k: '12', v: 'Monthly content drafts' },
+        { k: '24h', v: 'Response target' },
+        { k: 'KRW 300k+', v: 'Pilot entry price' },
+      ],
+      packages: [
+        {
+          name: 'Starter',
+          price: 'KRW 300k/mo',
+          tag: 'First step',
+          body: 'A light start with review replies and Naver Place improvements.',
+          items: ['Review reply drafts twice a week', 'Naver Place checklist', '4 blog drafts per month', 'Monthly action report']
+        },
+        {
+          name: 'Growth',
+          price: 'KRW 700k/mo',
+          tag: 'Recommended',
+          body: 'An operating package for search visibility and repeat visits.',
+          items: ['12 blog/social drafts per month', 'Review pain/praise summary', 'Promo copy and image concepts', '3 competitor comparison report']
+        },
+        {
+          name: 'Automation',
+          price: 'Custom',
+          tag: 'System build',
+          body: 'Automate repeated inquiries, reservation notes, and reporting.',
+          items: ['Kakao/email response assistant', 'Google Sheets dashboard', 'Weekly auto-report', 'Industry FAQ knowledge base']
+        },
+      ],
+      workflow: [
+        { n: '01', t: 'Free audit', b: 'I review the current Place page and content, then return five concrete fixes.' },
+        { n: '02', t: 'Pilot', b: 'For two weeks, I deliver review replies, blog drafts, and promo copy against real business inputs.' },
+        { n: '03', t: 'Monthly ops', b: 'We keep only the useful routines and turn them into a repeatable weekly operating system.' },
+      ],
+      cta: 'Request a local AI audit'
     },
     projects: {
       kicker: 'PROJECTS', hl1: 'Currently running in production.',
@@ -481,7 +568,7 @@ function V2Monogram({ dark, lang }) {
   React.useEffect(function() {
     var root = rootRef.current;
     if (!root) return;
-    var sections = ['intro','about','services','projects','process','stack','contact'];
+    var sections = ['intro','about','services','localAi','projects','process','stack','contact'];
     var els = sections.map(function(id) { return document.getElementById('v2-' + id); }).filter(Boolean);
     var updateNav = function(id) {
       Object.entries(navButtonsRef.current).forEach(function(entry) {
@@ -579,7 +666,7 @@ function V2Monogram({ dark, lang }) {
                   <LiveDot color={bg} />{t.intro.ctaPrimary}
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7h8M8 3l4 4-4 4"/></svg>
                 </a>
-                <a href="#v2-projects" onClick={function(e) { e.preventDefault(); scrollTo('projects'); }} style={{ padding: '16px 24px', background: 'transparent', color: fg, border: '1px solid ' + hairline, textDecoration: 'none', fontSize: 14, fontWeight: 500, letterSpacing: 0.2 }}>{t.intro.ctaSecondary}</a>
+                <a href="#v2-localAi" onClick={function(e) { e.preventDefault(); scrollTo('localAi'); }} style={{ padding: '16px 24px', background: 'transparent', color: fg, border: '1px solid ' + hairline, textDecoration: 'none', fontSize: 14, fontWeight: 500, letterSpacing: 0.2 }}>{t.intro.ctaSecondary}</a>
                 <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 1, marginLeft: 8 }}>
                   {t.intro.meta.map(function(s, i) { return i % 2 === 1 ? <span key={i} style={{ color: i === 3 ? accent : fg }}>{s}</span> : <React.Fragment key={i}>{s}</React.Fragment>; })}
                 </div>
@@ -667,10 +754,76 @@ function V2Monogram({ dark, lang }) {
             </div>
           </section>
 
-          {/* 04 PROJECTS */}
+          {/* 04 LOCAL AI GROWTH */}
+          <section id="v2-localAi" style={{ padding: '120px 72px', minHeight: '100vh', borderTop: '1px solid ' + hairline, background: panel }}>
+            <div className="v2-section-grid" style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: 64, alignItems: 'start', marginBottom: 56 }}>
+              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 04</div>{t.localAi.kicker}</div></Anim>
+              <div>
+                <Anim variant="fade-up" delay={100}><h2 style={{ fontSize: 'clamp(32px,3.5vw,48px)', lineHeight: 1.2, letterSpacing: 0, fontWeight: 500, margin: 0, marginBottom: 20 }}>{t.localAi.hl1}<br/>{t.localAi.hl2}</h2></Anim>
+                <Anim variant="fade-up" delay={160}><p style={{ fontSize: 17, lineHeight: 1.7, color: muted, margin: 0, maxWidth: 760 }}>{t.localAi.lead}</p></Anim>
+              </div>
+            </div>
+
+            <Anim variant="fade-up" delay={180}>
+              <div className="v2-local-proof" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 1, background: hairline, border: '1px solid ' + hairline, marginBottom: 40 }}>
+                {t.localAi.proof.map(function(x) { return (
+                  <div key={x.v} style={{ background: bg, padding: 24, minHeight: 120 }}>
+                    <div style={{ fontSize: 28, fontWeight: 500, letterSpacing: 0, color: fg, marginBottom: 8 }}>{x.k}</div>
+                    <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 1, lineHeight: 1.5 }}>{x.v}</div>
+                  </div>
+                ); })}
+              </div>
+            </Anim>
+
+            <div className="v2-local-packages" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24, marginBottom: 48 }}>
+              {t.localAi.packages.map(function(pkg, i) { return (
+                <Anim key={pkg.name} variant="fade-up" delay={i * 90}>
+                  <article style={{ height: '100%', padding: 30, border: '1px solid ' + (pkg.tag === '추천' || pkg.tag === 'Recommended' ? accent : hairline), background: bg, display: 'flex', flexDirection: 'column', gap: 22 }}>
+                    <header>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', gap: 12, marginBottom: 18 }}>
+                        <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: accent, letterSpacing: 1.5 }}>{pkg.tag}</div>
+                        <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 1 }}>{pkg.price}</div>
+                      </div>
+                      <h3 style={{ fontSize: 26, fontWeight: 500, letterSpacing: 0, margin: 0, marginBottom: 12 }}>{pkg.name}</h3>
+                      <p style={{ fontSize: 14, lineHeight: 1.65, color: muted, margin: 0 }}>{pkg.body}</p>
+                    </header>
+                    <div style={{ marginTop: 'auto', borderTop: '1px solid ' + hairline, paddingTop: 20, display: 'grid', gap: 10 }}>
+                      {pkg.items.map(function(item) { return (
+                        <div key={item} style={{ display: 'flex', alignItems: 'start', gap: 10, fontSize: 13, lineHeight: 1.55, color: fg }}>
+                          <span style={{ width: 5, height: 5, background: accent, display: 'inline-block', marginTop: 8, flexShrink: 0 }} />{item}
+                        </div>
+                      ); })}
+                    </div>
+                  </article>
+                </Anim>
+              ); })}
+            </div>
+
+            <Anim variant="fade-up" delay={280}>
+              <div className="v2-local-workflow" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 1, background: hairline, border: '1px solid ' + hairline, marginBottom: 28 }}>
+                {t.localAi.workflow.map(function(step) { return (
+                  <div key={step.n} style={{ background: bg, padding: 26 }}>
+                    <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: accent, letterSpacing: 1.5, marginBottom: 10 }}>{step.n}</div>
+                    <div style={{ fontSize: 20, fontWeight: 500, marginBottom: 10, letterSpacing: 0 }}>{step.t}</div>
+                    <div style={{ fontSize: 14, lineHeight: 1.65, color: muted }}>{step.b}</div>
+                  </div>
+                ); })}
+              </div>
+            </Anim>
+
+            <Anim variant="fade-up" delay={340}>
+              <a href="mailto:giha1205@gmail.com?subject=%5BLocal%20AI%20Growth%5D%20Free%20audit" onClick={function(e) { e.preventDefault(); window.location.href = 'mailto:giha1205@gmail.com?subject=%5BLocal%20AI%20Growth%5D%20Free%20audit'; }} style={{ padding: '17px 26px', background: fg, color: bg, textDecoration: 'none', fontSize: 15, fontWeight: 500, letterSpacing: 0, display: 'inline-flex', alignItems: 'center', gap: 12, cursor: 'pointer', transition: 'transform .2s' }}
+                onMouseEnter={function(e) { e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                onMouseLeave={function(e) { e.currentTarget.style.transform = 'translateY(0)'; }}>
+                {t.localAi.cta}<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 8h10M9 4l5 4-5 4"/></svg>
+              </a>
+            </Anim>
+          </section>
+
+          {/* 05 PROJECTS */}
           <section id="v2-projects" style={{ padding: '120px 72px', minHeight: '100vh', borderTop: '1px solid ' + hairline, background: panel }}>
             <div className="v2-section-grid" style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: 64, alignItems: 'start', marginBottom: 64 }}>
-              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 04</div>{t.projects.kicker}</div></Anim>
+              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 05</div>{t.projects.kicker}</div></Anim>
               <Anim variant="fade-up" delay={100}><h2 style={{ fontSize: 'clamp(32px,3.5vw,48px)', lineHeight: 1.2, letterSpacing: '-0.02em', fontWeight: 500, margin: 0 }}>{t.projects.hl1}</h2></Anim>
             </div>
             <div style={{ display: 'grid', gap: 1, background: hairline, border: '1px solid ' + hairline }}>
@@ -716,10 +869,10 @@ function V2Monogram({ dark, lang }) {
             </Anim>
           </section>
 
-          {/* 05 PROCESS */}
+          {/* 06 PROCESS */}
           <section id="v2-process" style={{ padding: '120px 72px', minHeight: '100vh', borderTop: '1px solid ' + hairline }}>
             <div className="v2-section-grid" style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: 64, alignItems: 'start', marginBottom: 64 }}>
-              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 05</div>{t.process.kicker}</div></Anim>
+              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 06</div>{t.process.kicker}</div></Anim>
               <Anim variant="fade-up" delay={100}><h2 style={{ fontSize: 'clamp(32px,3.5vw,48px)', lineHeight: 1.2, letterSpacing: '-0.02em', fontWeight: 500, margin: 0 }}>{t.process.hl1}<br/>{t.process.hl2}</h2></Anim>
             </div>
             <div style={{ position: 'relative' }}>
@@ -767,10 +920,10 @@ function V2Monogram({ dark, lang }) {
             </Anim>
           </section>
 
-          {/* 06 STACK */}
+          {/* 07 STACK */}
           <section id="v2-stack" style={{ padding: '120px 72px', minHeight: '100vh', borderTop: '1px solid ' + hairline, background: panel }}>
             <div className="v2-section-grid" style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: 64, alignItems: 'start', marginBottom: 64 }}>
-              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 06</div>{t.stack.kicker}</div></Anim>
+              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 07</div>{t.stack.kicker}</div></Anim>
               <Anim variant="fade-up" delay={100}><h2 style={{ fontSize: 'clamp(32px,3.5vw,48px)', lineHeight: 1.2, letterSpacing: '-0.02em', fontWeight: 500, margin: 0 }}>{t.stack.hl1}</h2></Anim>
             </div>
             <div className="v2-stack-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24 }}>
@@ -943,11 +1096,11 @@ function V2Monogram({ dark, lang }) {
             </div>
           </section>
 
-          {/* 07 CONTACT */}
+          {/* 08 CONTACT */}
           <section id="v2-contact" style={{ padding: '140px 72px 100px', minHeight: '100vh', borderTop: '1px solid ' + hairline, position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', top: -60, right: -60, opacity: 0.5 }}><AMark size={300} fg={fg} accent={accent} /></div>
             <div className="v2-section-grid" style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: 64, alignItems: 'start', position: 'relative' }}>
-              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 07</div>{t.contact.kicker}</div></Anim>
+              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 08</div>{t.contact.kicker}</div></Anim>
               <div>
                 <Anim variant="fade-up" delay={100}>
                   <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: accent, letterSpacing: 2, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}><LiveDot color={accent} />{t.contact.availability}</div>
