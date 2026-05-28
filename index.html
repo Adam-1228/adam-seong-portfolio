@@ -1015,7 +1015,7 @@ function V2Monogram({ dark, lang }) {
                     borderRadius: '999px',
                     opacity: 0.85
                   }}>
-                    v6.3.4
+                    v6.3.5
                   </span>
                 </header>
                 <p style={{
@@ -1025,7 +1025,7 @@ function V2Monogram({ dark, lang }) {
                   margin: '0 0 28px',
                   maxWidth: '720px'
                 }}>
-                  {lang === 'ko' ? '한국장, 미국장, 코인을 하나의 로컬 멀티마켓 환경에서 분리 운용하는 자동매매 클라이언트입니다. v6.3.4는 리스크/탐색매수 축소가 최소주문 아래로 과하게 줄어 거래 기회를 막던 문제를 한국장, 미국장, 코인장별로 보정했습니다.' : 'A local multi-market auto-trading client for Korean stocks, U.S. stocks, and crypto. v6.3.4 corrects over-shrunk risk and probe sizing so valid candidates are not blocked below the configured minimum order.'}
+                  {lang === 'ko' ? '한국장, 미국장, 코인을 하나의 로컬 멀티마켓 환경에서 분리 운용하는 자동매매 클라이언트입니다. v6.3.5는 한국장 ATR 동적 손절/익절이 사용자가 입력한 고정 손절·익절 기준을 더 느슨하게 덮어쓰지 않도록 보정했습니다.' : 'A local multi-market auto-trading client for Korean stocks, U.S. stocks, and crypto. v6.3.5 prevents Korean-stock ATR exits from loosening the fixed stop-loss and take-profit boundaries entered by the user.'}
                 </p>
                 <ul style={{
                   display: 'flex',
