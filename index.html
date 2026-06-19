@@ -1015,7 +1015,7 @@ function V2Monogram({ dark, lang }) {
                     borderRadius: '999px',
                     opacity: 0.85
                   }}>
-                    v10.2.5
+                    v10.2.6
                   </span>
                 </header>
                 <p style={{
@@ -1025,7 +1025,7 @@ function V2Monogram({ dark, lang }) {
                   margin: '0 0 28px',
                   maxWidth: '720px'
                 }}>
-                  {lang === 'ko' ? '한국장, 미국장, 코인을 하나의 로컬 멀티마켓 환경에서 분리 운용하는 자동매매 클라이언트입니다. v10.2.5는 토스증권 미국장 연결에서 실제 주문 허용 체크박스가 막히던 문제를 수정하고, 토스 공통 계좌 잔고와 주문가능 USD 확인 뒤 정수주 지정가 주문을 전송하도록 연결한 실주문 패치입니다.' : 'A local multi-market auto-trading client for Korean stocks, U.S. stocks, and crypto. v10.2.5 fixes the Toss Securities U.S. live-order toggle, verifies the shared Toss account balance and USD buying power, and routes integer-share limit orders through the Toss Open API.'}
+                  {lang === 'ko' ? '한국장, 미국장, 코인을 하나의 로컬 멀티마켓 환경에서 분리 운용하는 자동매매 클라이언트입니다. v10.2.6은 토스증권 미국장 잔고/주문가능금액 조회에서 계좌번호 대신 공식 accountSeq를 자동 적용해 account-not-found 오류를 줄인 계좌 식별값 보정 패치입니다.' : 'A local multi-market auto-trading client for Korean stocks, U.S. stocks, and crypto. v10.2.6 resolves Toss Securities U.S. account identifiers by using the official accountSeq for balance, buying-power, and order requests instead of raw account-number text.'}
                 </p>
                 <ul style={{
                   display: 'flex',
@@ -1048,7 +1048,7 @@ function V2Monogram({ dark, lang }) {
                   ); })}
                 </ul>
                 <a
-                  href="https://github.com/Adam-1228/adam-seong-portfolio/releases/download/v10.2.5/AutoTrader_Setup_10.2.5.exe"
+                  href="https://github.com/Adam-1228/adam-seong-portfolio/releases/download/v10.2.6/AutoTrader_Setup_10.2.6.exe"
                   download
                   style={{
                     display: 'inline-flex',
