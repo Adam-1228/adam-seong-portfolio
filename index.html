@@ -726,10 +726,10 @@ function V2Monogram({ dark, lang }) {
               <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 03</div>{t.services.kicker}</div></Anim>
               <Anim variant="fade-up" delay={100}><h2 style={{ fontSize: 'clamp(32px,3.5vw,48px)', lineHeight: 1.2, letterSpacing: '-0.02em', fontWeight: 500, margin: 0 }}>{t.services.hl1}<br/>{t.services.hl2}</h2></Anim>
             </div>
-            <div className="v2-services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 24 }}>
+            <div className="v2-services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 24, alignItems: 'start' }}>
               {t.services.items.map(function(s, i) { return (
-                <Anim key={s.k} variant="fade-up" delay={i * 80} style={{ height: '100%' }}>
-                  <div style={{ padding: 32, border: '1px solid ' + hairline, background: bg, height: '100%', display: 'flex', flexDirection: 'column', transition: 'border-color .25s, transform .3s' }}
+                <Anim key={s.k} variant="fade-up" delay={i * 80}>
+                  <div style={{ padding: 32, border: '1px solid ' + hairline, background: bg, display: 'flex', flexDirection: 'column', transition: 'border-color .25s, transform .3s' }}
                     onMouseEnter={function(e) { e.currentTarget.style.borderColor = accent; e.currentTarget.style.transform = 'translateY(-3px)'; }}
                     onMouseLeave={function(e) { e.currentTarget.style.borderColor = hairline; e.currentTarget.style.transform = 'translateY(0)'; }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: 28 }}>
