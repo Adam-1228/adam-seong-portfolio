@@ -6,7 +6,7 @@
      <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="ihmage/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
     <!-- Open Graph -->
@@ -728,8 +728,8 @@ function V2Monogram({ dark, lang }) {
             </div>
             <div className="v2-services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 24 }}>
               {t.services.items.map(function(s, i) { return (
-                <Anim key={s.k} variant="fade-up" delay={i * 80}>
-                  <div style={{ padding: 32, border: '1px solid ' + hairline, background: bg, height: '100%', display: 'flex', flexDirection: 'column', transition: 'border-color .25s, transform .3s', overflow: 'hidden' }}
+                <Anim key={s.k} variant="fade-up" delay={i * 80} style={{ height: '100%' }}>
+                  <div style={{ padding: 32, border: '1px solid ' + hairline, background: bg, height: '100%', display: 'flex', flexDirection: 'column', transition: 'border-color .25s, transform .3s' }}
                     onMouseEnter={function(e) { e.currentTarget.style.borderColor = accent; e.currentTarget.style.transform = 'translateY(-3px)'; }}
                     onMouseLeave={function(e) { e.currentTarget.style.borderColor = hairline; e.currentTarget.style.transform = 'translateY(0)'; }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: 28 }}>
