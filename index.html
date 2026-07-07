@@ -2,18 +2,18 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
-<title>Adam Seong — AI Engineer</title>
+<title>Adam Seong — AI Engineer & Product Builder</title>
      <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="ihmage/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://adam-1228.github.io/adam-seong-portfolio/">
-    <meta property="og:title" content="Adam Seong — AI Engineer">
-    <meta property="og:description" content="업무 프로세스 자동화 · LLM Agent · 실시간 데이터 파이프라인 · 클라우드 배포. 데모가 아니라 운영되는 시스템을 만듭니다.">
+    <meta property="og:title" content="Adam Seong — AI Engineer & Product Builder">
+    <meta property="og:description" content="ADAM Orbit 릴리즈, LLM Agent, 업무 자동화, 실시간 데이터 파이프라인, Codex 기반 게임/툴 제작 경험을 담은 포트폴리오.">
     <meta property="og:image" content="https://adam-1228.github.io/adam-seong-portfolio/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -23,16 +23,17 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Adam Seong — AI Engineer">
-    <meta name="twitter:description" content="업무 프로세스 자동화 · LLM Agent · 실시간 데이터 파이프라인. 데모가 아니라 운영되는 시스템을 만듭니다.">
+    <meta name="twitter:title" content="Adam Seong — AI Engineer & Product Builder">
+    <meta name="twitter:description" content="ADAM Orbit 릴리즈, LLM Agent, 업무 자동화, 실시간 데이터 파이프라인, Codex 기반 게임/툴 제작 경험.">
     <meta name="twitter:image" content="https://adam-1228.github.io/adam-seong-portfolio/og-image.png">
     <meta name="twitter:image:alt" content="Adam Seong — AI Engineer portfolio cover">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="AI 엔지니어 Adam Seong. LLM 에이전트·업무 자동화·실시간 데이터 파이프라인·클라우드 배포 전문." />
+<meta name="description" content="AI 엔지니어 Adam Seong. ADAM Orbit 릴리즈, LLM 에이전트, 업무 자동화, 실시간 데이터 파이프라인, Codex 기반 게임/툴 제작 경험." />
+<meta name="theme-color" content="#FAFAF7" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>h
+<style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body, #root { height: 100%; width: 100%; overflow: hidden; background: #FAFAF7; }
   a { -webkit-tap-highlight-color: transparent; }
@@ -51,6 +52,14 @@
     .v2-project-row { grid-template-columns: 1fr !important; gap: 12px !important; }
     .v2-contact-meta { grid-template-columns: 1fr 1fr !important; }
     .v2-principles-grid { grid-template-columns: 1fr !important; }
+    .v2-products-proof { grid-template-columns: 1fr 1fr !important; }
+  }
+  @media (max-width: 640px) {
+    .v2-stack-grid,
+    .v2-process-grid,
+    .v2-stats-grid,
+    .v2-contact-meta,
+    .v2-products-proof { grid-template-columns: 1fr !important; }
   }
 </style>
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
@@ -66,7 +75,7 @@ const V2_I18N = {
   ko: {
     name: 'Adam Seong', role: 'AI Engineer',
     location: 'SEONGNAM \u00b7 KR', localTime: 'LOCAL TIME', locationLabel: 'LOCATION',
-    available: 'AVAILABLE \u00b7 Q2',
+    available: 'AVAILABLE \u00b7 Q3',
     nav: [
       { id: 'intro', num: '01', label: 'Intro' },
       { id: 'about', num: '02', label: 'About' },
@@ -75,10 +84,11 @@ const V2_I18N = {
       { id: 'projects', num: '05', label: 'Projects' },
       { id: 'process', num: '06', label: 'Process' },
       { id: 'stack', num: '07', label: 'Stack' },
-      { id: 'contact', num: '08', label: 'Contact' },
+      { id: 'products', num: '08', label: 'Products' },
+      { id: 'contact', num: '09', label: 'Contact' },
     ],
     intro: {
-      badge: '8 SYSTEMS LIVE \u00b7 UPDATED',
+      badge: 'ADAM ORBIT v10.2.6 \u00b7 PORTFOLIO UPDATED',
       hl1: '\ubc18\ubcf5\ub418\ub294 \uc5c5\ubb34\uc5d0',
       hl2: '\ub4e4\uc5b4\uac00\ub294 \uc2dc\uac04\uc744',
       hl3: '\ub418\ub3cc\ub824\ub4dc\ub9bd\ub2c8\ub2e4',
@@ -87,10 +97,10 @@ const V2_I18N = {
       ctaSecondary: 'Local AI \ud328\ud0a4\uc9c0 \ubcf4\uae30 \u2192',
       meta: ['\uccab \ub2f5\ubcc0 ', '24\uc2dc\uac04 \uc774\ub0b4', ' \u00b7 \uc9c4\ub2e8 \uc138\uc158 ', '\ubb34\ub8cc'],
       stats: [
-        { k: '40%+', v: '\uc5c5\ubb34 \uc2dc\uac04 \uc808\uac10' },
-        { k: '8+', v: '\ud504\ub85c\ub355\uc158 \uc6b4\uc601' },
+        { k: '452', v: 'ADAM Orbit \ud14c\uc2a4\ud2b8 \ud1b5\uacfc' },
+        { k: '4+', v: 'Codex \uac8c\uc784/\ud234 \ud504\ub85c\ud1a0\ud0c0\uc785' },
         { k: '24/7', v: 'Agent Uptime' },
-        { k: '100%', v: '\uc2e4\uc0ac\uc6a9 \uc2dc\uc2a4\ud15c' },
+        { k: 'Q3', v: '\uc2e0\uaddc \uc758\ub8b0 \uac00\ub2a5' },
       ],
     },
     about: {
@@ -169,26 +179,26 @@ const V2_I18N = {
       cta: '소상공인 AI 운영 무료 진단 요청'
     },
     projects: {
-      kicker: 'PROJECTS', hl1: '\ud604\uc7ac \uc6b4\uc601 \uc911\uc778 \uc2dc\uc2a4\ud15c.',
-      impactLabel: 'IMPACT',
-      footerNote: '+ \ub2e4\uc218\uc758 \ube44\uacf5\uac1c \uae30\uc5c5 \ud504\ub85c\uc81d\ud2b8',
+      kicker: 'PROJECTS', hl1: '실제 릴리즈와 Codex 제작 경험.',
+      impactLabel: 'EVIDENCE',
+      footerNote: '+ 제품 릴리즈와 게임/툴 프로토타입을 계속 누적 중',
       footerCta: 'DISCUSS YOUR PROJECT',
       items: [
-        { id: 'sales', code: 'P01', name: 'AI Sales Automation', status: 'LIVE', since: '2025', impact: '\ub9ac\ub4dc \uc804\ud658\uc728 +32%',
-          tag: '\uae30\uc5c5 B2B \u00b7 LangGraph',
-          body: 'LangGraph \uba40\ud2f0 \uc5d0\uc774\uc804\ud2b8 \uae30\ubc18 \ub9ac\uc11c\uce58 \u2192 \uc774\uba54\uc77c \uc791\uc131 \u2192 \ubc1c\uc1a1\uae4c\uc9c0 \uc804 \uacfc\uc815 \uc790\ub3d9\ud654.',
+        { id: 'orbit', code: 'P01', name: 'ADAM Orbit', status: 'RELEASE', since: '2026', impact: 'v10.2.6 · 452 passed',
+          tag: 'Windows Desktop · Broker OpenAPI',
+          body: '한국장, 미국장, 코인을 하나의 로컬 멀티마켓 환경에서 분리 운용하는 자동매매 클라이언트입니다. GitHub Releases, 설치 파일, 검증 로그까지 함께 관리합니다.',
+          tech: ['Windows', 'OpenAPI', 'SQLite', 'Release QA', 'SHA256'] },
+        { id: 'sales', code: 'P02', name: 'AI Sales Automation', status: 'LIVE', since: '2025', impact: '리드 전환율 +32%',
+          tag: '기업 B2B · LangGraph',
+          body: '리서치, 이메일 작성, 발송, 승인 흐름까지 LangGraph 멀티 에이전트와 HITL로 자동화한 운영형 세일즈 시스템입니다.',
           tech: ['LangGraph', 'Gemini', 'SendGrid', 'Flask', 'AWS EC2'] },
-        { id: 'jarvis', code: 'P02', name: 'Jarvis AI Assistant', status: 'LIVE', since: '2025', impact: '\uc77c \uc5c5\ubb34 \uc790\ub3d9 \ucc98\ub9ac',
-          tag: '\uac1c\uc778 \ube44\uc11c \u00b7 Claude',
-          body: 'Claude \uae30\ubc18 \uac1c\uc778 \ube44\uc11c. \uc77c\uc815 \uad00\ub9ac, \uc774\uba54\uc77c, \ud30c\uc77c \uad00\ub9ac \ub4f1 \uc790\uc5f0\uc5b4 \uba85\ub839\uc73c\ub85c \ucc98\ub9ac.',
-          tech: ['Claude API', 'Tool Use', 'Async', 'SQLite'] },
-        { id: 'trade', code: 'P03', name: 'AI Trading System', status: 'LIVE', since: '2025', impact: '24/7 \uc790\ub3d9 \ubd84\uc11d',
-          tag: '\uc2e4\uc2dc\uac04 \ub370\uc774\ud130 \u00b7 Gemini',
-          body: '\uc2e4\uc2dc\uac04 \uc2dc\uc138 \uc218\uc9d1 \u2192 AI \uae30\uc220\uc801 \ubd84\uc11d \u2192 \ub9e4\uc218/\ub9e4\ub3c4 \uc2dc\uadf8\ub110.',
-          tech: ['Gemini', 'Upbit API', 'KIS API', 'Telegram'] },
+        { id: 'games', code: 'P03', name: 'Codex Game Prototypes', status: 'BUILD', since: '2026', impact: 'Unity · Three.js · Unreal',
+          tag: 'Game Studio · Codex',
+          body: 'Last One or Nothing, The Gray Maze, Three Doors of Fate, Unreal Gray Maze 등 Codex 기반 게임 제작과 패키징, QA 경험을 정리했습니다.',
+          tech: ['Unity 6', 'Three.js', 'Unreal C++', 'Electron', 'Blender'] },
         { id: 'nail', code: 'P04', name: 'Nail Shop Budget Dashboard', status: 'LIVE', since: '2025-2028',
-          impact: '4\ub144 \uc7ac\ubb34 \ud750\ub984 \uc2dc\uac01\ud654', tag: '\uc18c\uc0c1\uacf5\uc778 \u00b7 Streamlit',
-          body: '\ub124\uc77c\uc0f5 4\ub144\uac04 \ub9e4\ucd9c\u00b7\ube44\uc6a9 \uc21c\uc218\uc775\uc744 \uc6d4\ubcc4 \uae30\ub85d\u00b7\ubd84\uc11d\ud558\ub294 \uc6f9 \uc571.',
+          impact: '4년 재무 흐름 시각화', tag: '소상공인 · Streamlit',
+          body: '네일샵 4년간 매출, 비용, 순수익을 월별로 기록하고 분석하는 운영형 대시보드입니다. 실제 의사결정에 쓰이는 화면을 목표로 만들었습니다.',
           tech: ['Streamlit', 'Google Sheets', 'Plotly', 'pandas'] },
       ],
     },
@@ -212,17 +222,17 @@ const V2_I18N = {
     stack: {
       kicker: 'STACK', hl1: '\ud504\ub85c\ub355\uc158\uae4c\uc9c0 \ucc45\uc784\uc9c0\ub294 \ub3c4\uad6c\ub4e4.',
       items: [
-        { cat: 'AI / LLM', items: ['Claude API', 'Gemini API', 'LangGraph', 'LangChain'] },
-        { cat: 'Languages', items: ['Python', 'TypeScript', 'SQL'] },
-        { cat: 'Data', items: ['pandas', 'Plotly', 'Streamlit', 'gspread'] },
-        { cat: 'Infra', items: ['AWS EC2', 'Docker Compose', 'GitHub Actions'] },
-        { cat: 'Backend', items: ['Flask', 'FastAPI', 'SQLite'] },
-        { cat: 'Integrations', items: ['Telegram Bot', 'News API', 'Upbit API', 'YouTube API'] },
+        { cat: 'AI / LLM', tone: '#2F7DF6', items: ['Claude API', 'Gemini API', 'OpenAI', 'Groq API', 'LangGraph', 'LangChain'] },
+        { cat: 'Languages', tone: '#22C55E', items: ['Python', 'TypeScript', 'JavaScript', 'SQL', 'Bash'] },
+        { cat: 'Data / Apps', tone: '#8B5CF6', items: ['pandas', 'Plotly', 'Streamlit', 'Google Sheets', 'SQLite'] },
+        { cat: 'Backend', tone: '#F59E0B', items: ['FastAPI', 'Flask', 'asyncio', 'WebSocket', 'REST'] },
+        { cat: 'Infra', tone: '#06B6D4', items: ['AWS EC2', 'Docker Compose', 'GitHub Actions', 'Vercel', 'Streamlit Cloud'] },
+        { cat: 'Game / 3D', tone: '#EF4444', items: ['Unity 6', 'Three.js', 'Unreal C++', 'Electron', 'Blender'] },
       ],
     },
     contact: {
       kicker: 'CONTACT',
-      availability: '2026 Q2 \u00b7 1-2\ud300 \uc758\ub8b0 \uac00\ub2a5',
+      availability: '2026 Q3 \u00b7 1-2\ud300 \uc758\ub8b0 \uac00\ub2a5',
       hl1: '\uc790\ub3d9\ud654\ud560 \ub9cc\ud55c', hl2: '\uc5c5\ubb34\uac00 \uc788\uc73c\uc2e0\uac00\uc694?',
       lead: ['30\ubd84 \ubb34\ub8cc \uc9c4\ub2e8 \uc138\uc158', '\uc5d0\uc11c \uc790\ub3d9\ud654 \uac00\ub2a5\ud55c \uc5c5\ubb34 \ud6c4\ubcf4\ub97c \ud568\uaed8 \ucc3e\uc544\ub4dc\ub9bd\ub2c8\ub2e4.'],
       ctaPrimary: '\ubb34\ub8cc \uc9c4\ub2e8 \uc138\uc158 \uc608\uc57d',
@@ -231,7 +241,7 @@ const V2_I18N = {
         { l: 'LOCATION', v: 'Seongnam, KR' },
         { l: 'RESPONSE', v: '~24h' },
         { l: 'CONSULT', v: 'Free \u00b7 30min' },
-        { l: 'STATUS', v: 'Available \u00b7 Q2' },
+        { l: 'STATUS', v: 'Available \u00b7 Q3' },
       ],
     },
     footer: { copy: '\u00a9 2026 ADAM SEONG', status: 'ALL SYSTEMS OPERATIONAL' },
@@ -239,7 +249,7 @@ const V2_I18N = {
   en: {
     name: 'Adam Seong', role: 'AI Engineer',
     location: 'SEONGNAM \u00b7 KR', localTime: 'LOCAL TIME', locationLabel: 'LOCATION',
-    available: 'AVAILABLE \u00b7 Q2',
+    available: 'AVAILABLE \u00b7 Q3',
     nav: [
       { id: 'intro', num: '01', label: 'Intro' },
       { id: 'about', num: '02', label: 'About' },
@@ -248,10 +258,11 @@ const V2_I18N = {
       { id: 'projects', num: '05', label: 'Projects' },
       { id: 'process', num: '06', label: 'Process' },
       { id: 'stack', num: '07', label: 'Stack' },
-      { id: 'contact', num: '08', label: 'Contact' },
+      { id: 'products', num: '08', label: 'Products' },
+      { id: 'contact', num: '09', label: 'Contact' },
     ],
     intro: {
-      badge: '8 SYSTEMS LIVE \u00b7 UPDATED',
+      badge: 'ADAM ORBIT v10.2.6 \u00b7 PORTFOLIO UPDATED',
       hl1: 'I give you back',
       hl2: 'the hours lost to',
       hl3: 'repetitive work',
@@ -260,10 +271,10 @@ const V2_I18N = {
       ctaSecondary: 'See local AI package \u2192',
       meta: ['First reply ', 'within 24h', ' \u00b7 Discovery call ', 'free'],
       stats: [
-        { k: '40%+', v: 'Hours saved' },
-        { k: '8+', v: 'In production' },
+        { k: '452', v: 'ADAM Orbit tests passed' },
+        { k: '4+', v: 'Codex game/tool prototypes' },
         { k: '24/7', v: 'Agent uptime' },
-        { k: '100%', v: 'Real usage' },
+        { k: 'Q3', v: 'New engagements open' },
       ],
     },
     about: {
@@ -342,26 +353,26 @@ const V2_I18N = {
       cta: 'Request a local AI audit'
     },
     projects: {
-      kicker: 'PROJECTS', hl1: 'Currently running in production.',
-      impactLabel: 'IMPACT',
-      footerNote: '+ several private enterprise engagements',
+      kicker: 'PROJECTS', hl1: 'Released products and Codex-built systems.',
+      impactLabel: 'EVIDENCE',
+      footerNote: '+ product releases and game/tool prototypes keep accumulating',
       footerCta: 'DISCUSS YOUR PROJECT',
       items: [
-        { id: 'sales', code: 'P01', name: 'AI Sales Automation', status: 'LIVE', since: '2025', impact: 'Lead conv. +32%',
-          tag: 'B2B \u00b7 LangGraph',
-          body: 'LangGraph multi-agent: research \u2192 email drafting \u2192 dispatch, fully automated.',
+        { id: 'orbit', code: 'P01', name: 'ADAM Orbit', status: 'RELEASE', since: '2026', impact: 'v10.2.6 · 452 passed',
+          tag: 'Windows Desktop · Broker OpenAPI',
+          body: 'A local multi-market auto-trading client that separates Korean stocks, U.S. stocks, and crypto into one desktop operating environment. Releases, installers, and verification logs are maintained together.',
+          tech: ['Windows', 'OpenAPI', 'SQLite', 'Release QA', 'SHA256'] },
+        { id: 'sales', code: 'P02', name: 'AI Sales Automation', status: 'LIVE', since: '2025', impact: 'Lead conv. +32%',
+          tag: 'B2B · LangGraph',
+          body: 'An operating sales system that automates research, email drafting, dispatch, and approval checkpoints with LangGraph multi-agent flows and HITL safeguards.',
           tech: ['LangGraph', 'Gemini', 'SendGrid', 'Flask', 'AWS EC2'] },
-        { id: 'jarvis', code: 'P02', name: 'Jarvis AI Assistant', status: 'LIVE', since: '2025', impact: 'Daily tasks automated',
-          tag: 'Personal \u00b7 Claude',
-          body: 'Claude-based personal assistant. Calendar, email, files \u2014 handled via natural language.',
-          tech: ['Claude API', 'Tool Use', 'Async', 'SQLite'] },
-        { id: 'trade', code: 'P03', name: 'AI Trading System', status: 'LIVE', since: '2025', impact: '24/7 auto-analysis',
-          tag: 'Real-time \u00b7 Gemini',
-          body: 'Live price feeds \u2192 AI technical analysis \u2192 buy/sell signals. Reports delivered automatically.',
-          tech: ['Gemini', 'Upbit API', 'KIS API', 'Telegram'] },
+        { id: 'games', code: 'P03', name: 'Codex Game Prototypes', status: 'BUILD', since: '2026', impact: 'Unity · Three.js · Unreal',
+          tag: 'Game Studio · Codex',
+          body: 'Game production, packaging, and QA experience from Codex-built projects such as Last One or Nothing, The Gray Maze, Three Doors of Fate, and Unreal Gray Maze.',
+          tech: ['Unity 6', 'Three.js', 'Unreal C++', 'Electron', 'Blender'] },
         { id: 'nail', code: 'P04', name: 'Nail Shop Budget Dashboard', status: 'LIVE', since: '2025-2028',
-          impact: '4-year finance view', tag: 'SMB \u00b7 Streamlit',
-          body: 'Four years of revenue, costs, and net profit tracked monthly. Mobile-first UI.',
+          impact: '4-year finance view', tag: 'SMB · Streamlit',
+          body: 'An operating dashboard for four years of monthly revenue, costs, and net profit. Built for real small-business decisions, not just charts.',
           tech: ['Streamlit', 'Google Sheets', 'Plotly', 'pandas'] },
       ],
     },
@@ -385,17 +396,17 @@ const V2_I18N = {
     stack: {
       kicker: 'STACK', hl1: 'Tools I take all the way to production.',
       items: [
-        { cat: 'AI / LLM', items: ['Claude API', 'Gemini API', 'LangGraph', 'LangChain'] },
-        { cat: 'Languages', items: ['Python', 'TypeScript', 'SQL'] },
-        { cat: 'Data', items: ['pandas', 'Plotly', 'Streamlit', 'gspread'] },
-        { cat: 'Infra', items: ['AWS EC2', 'Docker Compose', 'GitHub Actions'] },
-        { cat: 'Backend', items: ['Flask', 'FastAPI', 'SQLite'] },
-        { cat: 'Integrations', items: ['Telegram Bot', 'News API', 'Upbit API', 'YouTube API'] },
+        { cat: 'AI / LLM', tone: '#2F7DF6', items: ['Claude API', 'Gemini API', 'OpenAI', 'Groq API', 'LangGraph', 'LangChain'] },
+        { cat: 'Languages', tone: '#22C55E', items: ['Python', 'TypeScript', 'JavaScript', 'SQL', 'Bash'] },
+        { cat: 'Data / Apps', tone: '#8B5CF6', items: ['pandas', 'Plotly', 'Streamlit', 'Google Sheets', 'SQLite'] },
+        { cat: 'Backend', tone: '#F59E0B', items: ['FastAPI', 'Flask', 'asyncio', 'WebSocket', 'REST'] },
+        { cat: 'Infra', tone: '#06B6D4', items: ['AWS EC2', 'Docker Compose', 'GitHub Actions', 'Vercel', 'Streamlit Cloud'] },
+        { cat: 'Game / 3D', tone: '#EF4444', items: ['Unity 6', 'Three.js', 'Unreal C++', 'Electron', 'Blender'] },
       ],
     },
     contact: {
       kicker: 'CONTACT',
-      availability: '2026 Q2 \u00b7 1-2 engagements open',
+      availability: '2026 Q3 \u00b7 1-2 engagements open',
       hl1: 'Got a workflow', hl2: 'worth automating?',
       lead: ['A free 30-minute discovery call', ' to find automation candidates together. No commitment \u2014 clarity on where AI fits.'],
       ctaPrimary: 'Book discovery call',
@@ -404,7 +415,7 @@ const V2_I18N = {
         { l: 'LOCATION', v: 'Seongnam, KR' },
         { l: 'RESPONSE', v: '~24h' },
         { l: 'CONSULT', v: 'Free \u00b7 30min' },
-        { l: 'STATUS', v: 'Available \u00b7 Q2' },
+        { l: 'STATUS', v: 'Available \u00b7 Q3' },
       ],
     },
     footer: { copy: '\u00a9 2026 ADAM SEONG', status: 'ALL SYSTEMS OPERATIONAL' },
@@ -449,37 +460,12 @@ function LiveClock({ color }) {
 }
 
 function Anim({ children, variant, delay, distance, style }) {
-  variant = variant || 'fade-up';
-  delay = delay || 0;
-  distance = distance || 60;
   var ref = React.useRef(null);
   React.useEffect(function() {
     var el = ref.current;
     if (!el) return;
-    var initialMap = {
-      'fade-up': 'translate3d(0,' + distance + 'px,0)',
-      'fade': 'translate3d(0,0,0)',
-      'slide-right': 'translate3d(-' + distance + 'px,0,0)',
-      'scale-up': 'translate3d(0,0,0) scale(0.94)',
-    };
-    var initial = initialMap[variant] || initialMap['fade-up'];
-    el.style.opacity = '0';
-    el.style.transform = initial;
-    el.style.transition = 'opacity .9s cubic-bezier(.2,.7,.2,1) ' + delay + 'ms, transform 1s cubic-bezier(.2,.7,.2,1) ' + delay + 'ms';
-    el.style.willChange = 'transform, opacity';
-    var entered = false;
-    var io = new IntersectionObserver(function(entries) {
-      if (entries[0].isIntersecting && !entered) {
-        entered = true;
-        requestAnimationFrame(function() {
-          el.style.opacity = '1';
-          el.style.transform = 'translate3d(0,0,0) scale(1)';
-        });
-        io.disconnect();
-      }
-    }, { threshold: 0.12 });
-    io.observe(el);
-    return function() { io.disconnect(); };
+    el.style.opacity = '1';
+    el.style.transform = 'translate3d(0,0,0) scale(1)';
   }, []);
   return <div ref={ref} style={style}>{children}</div>;
 }
@@ -568,7 +554,7 @@ function V2Monogram({ dark, lang }) {
   React.useEffect(function() {
     var root = rootRef.current;
     if (!root) return;
-    var sections = ['intro','about','services','localAi','projects','process','stack','contact'];
+    var sections = ['intro','about','services','localAi','projects','process','stack','products','contact'];
     var els = sections.map(function(id) { return document.getElementById('v2-' + id); }).filter(Boolean);
     var updateNav = function(id) {
       Object.entries(navButtonsRef.current).forEach(function(entry) {
@@ -596,12 +582,19 @@ function V2Monogram({ dark, lang }) {
     if (el && rootRef.current) rootRef.current.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
   };
 
+  React.useEffect(function() {
+    var id = (window.location.hash || '').replace('#v2-', '').replace('#', '');
+    if (!id) return;
+    var timer = setTimeout(function() { scrollTo(id); }, 80);
+    return function() { clearTimeout(timer); };
+  }, [lang]);
+
   var todayStr = React.useMemo(function() { return new Date().toLocaleDateString('en-CA'); }, []);
   var _faq = React.useState(0), openFaq = _faq[0], setOpenFaq = _faq[1];
   var heroLines = [t.intro.hl1, { text: t.intro.hl2, muted: true }, t.intro.hl3 + '.'];
 
   return (
-    <div ref={rootRef} style={{
+    <div ref={rootRef} data-scroll-root="true" style={{
       height: '100vh', width: '100vw', overflowY: 'auto', overflowX: 'hidden',
       background: bg, color: fg,
       fontFamily: '"Inter Tight", -apple-system, sans-serif',
@@ -927,15 +920,35 @@ function V2Monogram({ dark, lang }) {
               <Anim variant="fade-up" delay={100}><h2 style={{ fontSize: 'clamp(32px,3.5vw,48px)', lineHeight: 1.2, letterSpacing: '-0.02em', fontWeight: 500, margin: 0 }}>{t.stack.hl1}</h2></Anim>
             </div>
             <div className="v2-stack-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24 }}>
-              {t.stack.items.map(function(g, i) { return (
+              {t.stack.items.map(function(g, i) {
+                var tone = g.tone || '#2F7DF6';
+                return (
                 <Anim key={g.cat} variant="fade-up" delay={i * 60}>
-                  <div style={{ padding: 24, border: '1px solid ' + hairline, background: bg }}>
+                  <div style={{
+                    minHeight: 164,
+                    padding: 24,
+                    border: '1px solid ' + tone + '66',
+                    background: 'linear-gradient(135deg, ' + tone + (dark ? '18' : '14') + ' 0%, ' + bg + ' 56%, ' + panel + ' 100%)',
+                    boxShadow: dark ? 'none' : '0 14px 34px rgba(15, 23, 42, 0.05)',
+                    position: 'relative',
+                    overflow: 'hidden'
+                  }}>
+                    <span aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: tone }} />
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
-                      <span style={{ display: 'inline-block', width: 14, height: 1, background: accent }} />
-                      <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, letterSpacing: 1.5, color: accent }}>{g.cat}</span>
+                      <span style={{ display: 'inline-block', width: 14, height: 2, background: tone }} />
+                      <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, letterSpacing: 1.5, color: tone, fontWeight: 600 }}>{g.cat}</span>
                     </div>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 12px' }}>
-                      {g.items.map(function(it) { return <span key={it} style={{ fontSize: 14, color: fg, fontFamily: '"JetBrains Mono", monospace' }}>{it}</span>; })}
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 9px' }}>
+                      {g.items.map(function(it) { return <span key={it} style={{
+                        fontSize: 12,
+                        color: fg,
+                        fontFamily: '"JetBrains Mono", monospace',
+                        background: tone + (dark ? '24' : '16'),
+                        border: '1px solid ' + tone + (dark ? '44' : '26'),
+                        borderRadius: 999,
+                        padding: '7px 10px',
+                        lineHeight: 1
+                      }}>{it}</span>; })}
                     </div>
                   </div>
                 </Anim>
@@ -944,10 +957,10 @@ function V2Monogram({ dark, lang }) {
           </section>
 
           {/* ============================================================ */}
-          {/* 07.5 PRODUCTS — Live Software (zip 다운로드)                */}
+          {/* 08 PRODUCTS — Live Software                                */}
           {/* ============================================================ */}
           <section id="v2-products" style={{
-            padding: '140px 72px 100px',
+            padding: '120px 72px 96px',
             background: bg,
             color: fg,
             borderTop: `1px solid ${hairline}`
@@ -961,7 +974,7 @@ function V2Monogram({ dark, lang }) {
                 marginBottom: '16px',
                 fontFamily: "'Inter Tight', Inter, system-ui, sans-serif"
               }}>
-                / Products
+                / 08 · PRODUCTS
               </div>
               <h2 style={{
                 fontSize: 'clamp(32px, 5vw, 56px)',
@@ -971,13 +984,15 @@ function V2Monogram({ dark, lang }) {
                 fontFamily: "'Inter Tight', Inter, system-ui, sans-serif",
                 lineHeight: 1.1
               }}>
-                Live Software
+                {lang === 'ko' ? '출시된 소프트웨어' : 'Live Software'}
               </h2>
               <article style={{
-                border: `1px solid ${hairline}`,
+                border: `1px solid ${accent}`,
                 borderRadius: '4px',
                 padding: '40px',
-                maxWidth: '900px',
+                maxWidth: '1080px',
+                background: dark ? 'linear-gradient(135deg, rgba(80,200,140,0.08), rgba(242,241,236,0.02))' : 'linear-gradient(135deg, rgba(40,160,100,0.09), rgba(255,255,255,0.86))',
+                boxShadow: dark ? 'none' : '0 24px 60px rgba(15, 23, 42, 0.08)',
                 transition: 'border-color 0.2s ease'
               }}>
                 <header style={{
@@ -1027,6 +1042,29 @@ function V2Monogram({ dark, lang }) {
                 }}>
                   {lang === 'ko' ? '한국장, 미국장, 코인을 하나의 로컬 멀티마켓 환경에서 분리 운용하는 자동매매 클라이언트입니다. v10.2.6은 토스증권 미국장 잔고/주문가능금액 조회에서 계좌번호 대신 공식 accountSeq를 자동 적용해 account-not-found 오류를 줄인 계좌 식별값 보정 패치입니다.' : 'A local multi-market auto-trading client for Korean stocks, U.S. stocks, and crypto. v10.2.6 resolves Toss Securities U.S. account identifiers by using the official accountSeq for balance, buying-power, and order requests instead of raw account-number text.'}
                 </p>
+                <div className="v2-products-proof" style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(4,1fr)',
+                  gap: '10px',
+                  margin: '0 0 28px'
+                }}>
+                  {[
+                    ['VERSION', 'v10.2.6'],
+                    ['TESTS', '452 passed'],
+                    ['VERIFY', 'PASS 169'],
+                    ['RELEASE', 'EXE · ZIP']
+                  ].map(function(x) { return (
+                    <div key={x[0]} style={{
+                      border: `1px solid ${hairline}`,
+                      background: bg,
+                      padding: '16px 18px',
+                      minHeight: 82
+                    }}>
+                      <div style={{ fontFamily: "ui-monospace, 'JetBrains Mono', monospace", fontSize: 10, letterSpacing: 1.4, color: accent, marginBottom: 10 }}>{x[0]}</div>
+                      <div style={{ fontSize: 19, fontWeight: 600, letterSpacing: '-0.01em' }}>{x[1]}</div>
+                    </div>
+                  ); })}
+                </div>
                 <ul style={{
                   display: 'flex',
                   flexWrap: 'wrap',
@@ -1096,11 +1134,11 @@ function V2Monogram({ dark, lang }) {
             </div>
           </section>
 
-          {/* 08 CONTACT */}
+          {/* 09 CONTACT */}
           <section id="v2-contact" style={{ padding: '140px 72px 100px', minHeight: '100vh', borderTop: '1px solid ' + hairline, position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', top: -60, right: -60, opacity: 0.5 }}><AMark size={300} fg={fg} accent={accent} /></div>
             <div className="v2-section-grid" style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: 64, alignItems: 'start', position: 'relative' }}>
-              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 08</div>{t.contact.kicker}</div></Anim>
+              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 09</div>{t.contact.kicker}</div></Anim>
               <div>
                 <Anim variant="fade-up" delay={100}>
                   <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: accent, letterSpacing: 2, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}><LiveDot color={accent} />{t.contact.availability}</div>
