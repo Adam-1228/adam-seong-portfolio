@@ -236,10 +236,10 @@ const V2_I18N = {
           tag: '기업 B2B · LangGraph',
           body: '리서치, 이메일 작성, 발송, 승인 흐름까지 LangGraph 멀티 에이전트와 HITL로 자동화한 운영형 세일즈 시스템입니다.',
           tech: ['LangGraph', 'Gemini', 'SendGrid', 'Flask', 'AWS EC2'] },
-        { id: 'games', code: 'P03', name: 'Codex Game Prototypes', status: 'BUILD', since: '2026', impact: 'Unity · Three.js · Unreal',
-          tag: 'Game Studio · Codex',
-          body: 'Last One or Nothing, The Gray Maze, Three Doors of Fate, Unreal Gray Maze 등 Codex 기반 게임 제작과 패키징, QA 경험을 정리했습니다.',
-          tech: ['Unity 6', 'Three.js', 'Unreal C++', 'Electron', 'Blender'] },
+        { id: 'games', code: 'P03', name: 'Original Games', status: 'SHOWCASE', since: '2026', impact: '2개 오리지널 게임',
+          tag: '오리지널 게임 · 멀티플랫폼',
+          body: 'Three Doors of Fate와 나라먹기, 두 개의 오리지널 게임을 별도 쇼케이스에서 소개합니다.',
+          tech: ['Unity 6', 'C#', 'React 19', 'Phaser 4', 'Capacitor 8'], href: '#v2-games', cta: 'Games 보기 →' },
         { id: 'nail', code: 'P04', name: 'Nail Shop Budget Dashboard', status: 'LIVE', since: '2025-2028',
           impact: '4년 재무 흐름 시각화', tag: '소상공인 · Streamlit',
           body: '네일샵 4년간 매출, 비용, 순수익을 월별로 기록하고 분석하는 운영형 대시보드입니다. 실제 의사결정에 쓰이는 화면을 목표로 만들었습니다.',
@@ -467,10 +467,10 @@ const V2_I18N = {
           tag: 'B2B · LangGraph',
           body: 'An operating sales system that automates research, email drafting, dispatch, and approval checkpoints with LangGraph multi-agent flows and HITL safeguards.',
           tech: ['LangGraph', 'Gemini', 'SendGrid', 'Flask', 'AWS EC2'] },
-        { id: 'games', code: 'P03', name: 'Codex Game Prototypes', status: 'BUILD', since: '2026', impact: 'Unity · Three.js · Unreal',
-          tag: 'Game Studio · Codex',
-          body: 'Game production, packaging, and QA experience from Codex-built projects such as Last One or Nothing, The Gray Maze, Three Doors of Fate, and Unreal Gray Maze.',
-          tech: ['Unity 6', 'Three.js', 'Unreal C++', 'Electron', 'Blender'] },
+        { id: 'games', code: 'P03', name: 'Original Games', status: 'SHOWCASE', since: '2026', impact: '2 original games',
+          tag: 'Original games · Cross-platform',
+          body: 'Explore Three Doors of Fate and Nation Eater as two original games in the dedicated showcase.',
+          tech: ['Unity 6', 'C#', 'React 19', 'Phaser 4', 'Capacitor 8'], href: '#v2-games', cta: 'View Games →' },
         { id: 'nail', code: 'P04', name: 'Nail Shop Budget Dashboard', status: 'LIVE', since: '2025-2028',
           impact: '4-year finance view', tag: 'SMB · Streamlit',
           body: 'An operating dashboard for four years of monthly revenue, costs, and net profit. Built for real small-business decisions, not just charts.',
@@ -1052,6 +1052,7 @@ function V2Monogram({ dark, lang }) {
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 10px', marginTop: 14 }}>
                         {p.tech.map(function(tc) { return <span key={tc} style={{ fontSize: 11, color: fg, fontFamily: '"JetBrains Mono", monospace', padding: '3px 8px', border: '1px solid ' + hairline, letterSpacing: 0.5 }}>{tc}</span>; })}
                       </div>
+                      {p.cta && <a href={p.href} onClick={function(e) { e.preventDefault(); scrollTo('games'); }} style={{ display: 'inline-flex', alignItems: 'center', minHeight: 36, marginTop: 16, color: accent, textDecoration: 'none', fontFamily: '"JetBrains Mono", monospace', fontSize: 11, fontWeight: 500, letterSpacing: 0.5 }}>{p.cta}</a>}
                     </div>
                     <div style={{ textAlign: 'right', borderLeft: '1px solid ' + hairline, paddingLeft: 20 }}>
                       <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 10, color: faint, letterSpacing: 1.5, marginBottom: 6 }}>{t.projects.impactLabel}</div>

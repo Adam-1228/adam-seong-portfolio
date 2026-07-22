@@ -108,3 +108,18 @@ test('synchronizes the document language with the active portfolio locale', () =
     /React\.useEffect\(function\(\) \{\s*document\.documentElement\.lang = lang === 'en' \? 'en' : 'ko';\s*\}, \[lang\]\);/,
   );
 });
+
+test('reframes the P03 project row as an accessible Games showcase gateway', () => {
+  assert.doesNotMatch(html, /Codex Game Prototypes/);
+  assert.equal(
+    (html.match(/id: 'games', code: 'P03', name: 'Original Games'/g) || []).length,
+    2,
+  );
+  assert.equal((html.match(/href: '#v2-games'/g) || []).length, 2);
+  assert.match(html, /cta: 'Games 보기 →'/);
+  assert.match(html, /cta: 'View Games →'/);
+  assert.match(
+    html,
+    /<a href=\{p\.href\} onClick=\{function\(e\) \{ e\.preventDefault\(\); scrollTo\('games'\); \}\}[^>]*>\{p\.cta\}<\/a>/,
+  );
+});
