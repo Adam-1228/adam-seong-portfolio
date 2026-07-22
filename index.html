@@ -61,6 +61,49 @@
     .v2-contact-meta,
     .v2-products-proof { grid-template-columns: 1fr !important; }
   }
+  .v2-games-proof { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin: 32px 0; }
+  .v2-games-proof > div { border: 1px solid var(--game-hairline); border-radius: 12px; padding: 16px; display: grid; gap: 5px; background: var(--game-panel); }
+  .v2-games-proof strong { font: 600 18px "JetBrains Mono",monospace; }
+  .v2-games-proof span { font: 400 10px "JetBrains Mono",monospace; opacity: .58; }
+  .v2-games-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+  .v2-game-card { border: 1px solid var(--game-hairline); border-radius: 18px; overflow: hidden; background: var(--game-panel); min-width: 0; }
+  .v2-game-media { height: 290px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 6px; padding: 10px; background: #111a2b; position: relative; overflow: hidden; }
+  .v2-game-media > img { width: 100%; height: 100%; object-fit: cover; border-radius: 9px; }
+  .v2-game-media > img:first-of-type { grid-row: 1; }
+  .v2-game-phones { grid-template-columns: repeat(3,minmax(0,1fr)); align-items: center; padding: 18px 62px; background: linear-gradient(145deg,#172f4b,#69374d 55%,#c69139); }
+  .v2-game-phones > img:not(.v2-game-icon) { object-fit: contain; filter: drop-shadow(0 12px 16px rgba(0,0,0,.28)); }
+  .v2-game-icon { position: absolute; z-index: 2; width: 54px !important; height: 54px !important; left: 16px; top: 16px; border-radius: 13px !important; box-shadow: 0 8px 18px rgba(0,0,0,.25); }
+  .v2-game-body { padding: 22px; }
+  .v2-game-title { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin: 12px 0 4px; }
+  .v2-game-body h3 { margin: 0; font-size: 25px; letter-spacing: -.025em; }
+  .v2-game-alt-title { color: var(--game-muted); font: 400 10px "JetBrains Mono",monospace; }
+  .v2-game-status { display: inline-flex; border-radius: 999px; padding: 6px 9px; font: 600 9px "JetBrains Mono",monospace; letter-spacing: .08em; }
+  .v2-game-status.green { color: #16714b; background: rgba(40,160,100,.12); }
+  .v2-game-status.amber { color: #8a5b12; background: rgba(222,157,47,.14); }
+  .v2-game-genre { color: var(--game-accent); font: 500 11px "JetBrains Mono",monospace; margin-bottom: 14px; }
+  .v2-game-body > p:not(.v2-game-genre) { color: var(--game-muted); line-height: 1.65; min-height: 80px; }
+  .v2-game-tech { display: flex; flex-wrap: wrap; gap: 7px; margin: 18px 0; }
+  .v2-game-tech span { border: 1px solid var(--game-hairline); border-radius: 999px; padding: 6px 9px; font: 400 9px "JetBrains Mono",monospace; }
+  .v2-game-proof { border-left: 2px solid var(--game-accent); padding: 10px 12px; color: var(--game-muted); background: var(--game-panel); font-size: 11px; line-height: 1.55; }
+  .v2-game-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .v2-game-link { display: inline-flex; min-height: 38px; align-items: center; border-radius: 8px; padding: 0 13px; color: inherit; border: 1px solid var(--game-hairline); text-decoration: none; font: 500 10px "JetBrains Mono",monospace; }
+  .v2-game-link:hover, .v2-game-link:focus-visible { border-color: var(--game-accent); outline: 2px solid var(--game-accent); outline-offset: 2px; }
+  .v2-game-link.disabled { color: var(--game-muted); border-style: dashed; cursor: not-allowed; opacity: .72; }
+  @media (max-width: 860px) {
+    .v2-games-grid { grid-template-columns: 1fr; }
+    .v2-games-proof { grid-template-columns: 1fr 1fr; }
+    .v2-game-media { height: 250px; }
+    .v2-game-phones { padding: 14px 40px; }
+  }
+  @media (max-width: 640px) {
+    .v2-games-proof { grid-template-columns: 1fr; }
+    .v2-game-media { height: 220px; }
+    .v2-game-phones { padding: 12px 24px; }
+    .v2-game-body > p:not(.v2-game-genre) { min-height: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .v2-game-card, .v2-game-card * { animation: none !important; transition: none !important; }
+  }
 </style>
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
@@ -82,10 +125,11 @@ const V2_I18N = {
       { id: 'services', num: '03', label: 'Services' },
       { id: 'localAi', num: '04', label: 'Local AI' },
       { id: 'projects', num: '05', label: 'Projects' },
-      { id: 'process', num: '06', label: 'Process' },
-      { id: 'stack', num: '07', label: 'Stack' },
-      { id: 'products', num: '08', label: 'Products' },
-      { id: 'contact', num: '09', label: 'Contact' },
+      { id: 'games', num: '06', label: 'Games' },
+      { id: 'process', num: '07', label: 'Process' },
+      { id: 'stack', num: '08', label: 'Stack' },
+      { id: 'products', num: '09', label: 'Products' },
+      { id: 'contact', num: '10', label: 'Contact' },
     ],
     intro: {
       badge: 'ADAM ORBIT v10.2.6 \u00b7 PORTFOLIO UPDATED',
@@ -202,6 +246,62 @@ const V2_I18N = {
           tech: ['Streamlit', 'Google Sheets', 'Plotly', 'pandas'] },
       ],
     },
+    games: {
+      kicker: 'PLAYABLE SYSTEMS · ORIGINAL GAMES',
+      headline: '선택과 축적이 만드는 두 개의 플레이 시스템.',
+      lead: '공개 WebGL 릴리스와 iOS 출시 파이프라인까지 진행한 두 개의 오리지널 게임을 소개합니다.',
+      proofs: [
+        { value: '2', label: 'Original games' },
+        { value: 'WebGL v1.0', label: 'Public release' },
+        { value: 'iOS 1.0.1', label: 'Build 3 ready' },
+      ],
+      items: [
+        {
+          id: 'three-doors-of-fate',
+          title: 'Three Doors of Fate',
+          altTitle: '세 개의 운명의 문',
+          status: 'PUBLIC RELEASE',
+          statusTone: 'green',
+          genre: '한국어 싱글 플레이 덱빌딩 로그라이크',
+          description: '세 개의 문 뒤에 숨은 위험과 보상을 선택하고, 카드·행운 주사위·빚을 관리해 보스를 돌파합니다.',
+          tech: ['Unity 6', 'C#', 'Turn-based', 'WebGL'],
+          proof: '공개 GitHub 저장소 · WebGL v1.0.0 릴리스 · 3종 클래스와 10룸 진행',
+          mediaMode: 'landscape',
+          media: [
+            { src: 'assets/games/three-doors-of-fate/class-selection.webp', alt: 'Three Doors of Fate의 세 클래스 선택 화면', width: 960, height: 540 },
+            { src: 'assets/games/three-doors-of-fate/door-selection.webp', alt: 'Three Doors of Fate에서 세 개의 문을 선택하는 화면', width: 960, height: 540 },
+            { src: 'assets/games/three-doors-of-fate/combat.webp', alt: 'Three Doors of Fate의 카드 전투 화면', width: 960, height: 540 },
+          ],
+          links: [
+            { label: 'GitHub', href: 'https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon', external: true },
+            { label: 'WebGL Release', href: 'https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon/releases/latest', external: true },
+          ],
+        },
+        {
+          id: 'nation-eater',
+          title: '나라먹기',
+          altTitle: 'Nation Eater',
+          status: 'iOS SUBMISSION READY',
+          statusTone: 'amber',
+          genre: '허구 정치 풍자 방치형 RPG · 시뮬레이션',
+          description: '시민에서 세계 의장까지 성장하며 선택형 공작의 후폭풍, 96종 풍자 뉴스와 18개 엔딩을 수집합니다.',
+          tech: ['React 19', 'Phaser 4', 'TypeScript', 'Capacitor 8'],
+          proof: 'iOS 1.0.1 build 3 archive · TestFlight 처리 기록 · 실기기 Release QA 문서',
+          mediaMode: 'phones',
+          icon: { src: 'assets/games/nation-eater/app-icon.webp', alt: '나라먹기 앱 아이콘', width: 512, height: 512 },
+          media: [
+            { src: 'assets/games/nation-eater/citizen.webp', alt: '나라먹기의 시민 단계 화면', width: 642, height: 1389 },
+            { src: 'assets/games/nation-eater/crisis-aftermath.webp', alt: '나라먹기의 공작 후폭풍 화면', width: 642, height: 1389 },
+            { src: 'assets/games/nation-eater/world-chair.webp', alt: '나라먹기의 세계 의장 단계 화면', width: 642, height: 1389 },
+          ],
+          links: [
+            { label: 'App Store 준비 중', disabled: true },
+            { label: '지원', href: 'support/' },
+            { label: '개인정보', href: 'privacy/' },
+          ],
+        },
+      ],
+    },
     process: {
       kicker: 'PROCESS',
       hl1: '\ud22c\uba85\ud55c 4\ub2e8\uacc4\ub85c', hl2: '\ud504\ub85c\uc81d\ud2b8\ub97c \uc9c4\ud589\ud569\ub2c8\ub2e4.',
@@ -256,10 +356,11 @@ const V2_I18N = {
       { id: 'services', num: '03', label: 'Services' },
       { id: 'localAi', num: '04', label: 'Local AI' },
       { id: 'projects', num: '05', label: 'Projects' },
-      { id: 'process', num: '06', label: 'Process' },
-      { id: 'stack', num: '07', label: 'Stack' },
-      { id: 'products', num: '08', label: 'Products' },
-      { id: 'contact', num: '09', label: 'Contact' },
+      { id: 'games', num: '06', label: 'Games' },
+      { id: 'process', num: '07', label: 'Process' },
+      { id: 'stack', num: '08', label: 'Stack' },
+      { id: 'products', num: '09', label: 'Products' },
+      { id: 'contact', num: '10', label: 'Contact' },
     ],
     intro: {
       badge: 'ADAM ORBIT v10.2.6 \u00b7 PORTFOLIO UPDATED',
@@ -374,6 +475,62 @@ const V2_I18N = {
           impact: '4-year finance view', tag: 'SMB · Streamlit',
           body: 'An operating dashboard for four years of monthly revenue, costs, and net profit. Built for real small-business decisions, not just charts.',
           tech: ['Streamlit', 'Google Sheets', 'Plotly', 'pandas'] },
+      ],
+    },
+    games: {
+      kicker: 'PLAYABLE SYSTEMS · ORIGINAL GAMES',
+      headline: 'Two playable systems built around choice and accumulation.',
+      lead: 'Two original games carried through a public WebGL release and an iOS submission pipeline.',
+      proofs: [
+        { value: '2', label: 'Original games' },
+        { value: 'WebGL v1.0', label: 'Public release' },
+        { value: 'iOS 1.0.1', label: 'Build 3 ready' },
+      ],
+      items: [
+        {
+          id: 'three-doors-of-fate',
+          title: 'Three Doors of Fate',
+          altTitle: '세 개의 운명의 문',
+          status: 'PUBLIC RELEASE',
+          statusTone: 'green',
+          genre: 'Korean-first single-player deck-building roguelike',
+          description: 'Choose the risk or reward behind three doors, then manage cards, luck dice, health, gold, and debt to defeat each boss.',
+          tech: ['Unity 6', 'C#', 'Turn-based', 'WebGL'],
+          proof: 'Public GitHub repository · WebGL v1.0.0 release · three classes and ten-room progression',
+          mediaMode: 'landscape',
+          media: [
+            { src: 'assets/games/three-doors-of-fate/class-selection.webp', alt: 'Three character classes in Three Doors of Fate', width: 960, height: 540 },
+            { src: 'assets/games/three-doors-of-fate/door-selection.webp', alt: 'Choosing among three doors in Three Doors of Fate', width: 960, height: 540 },
+            { src: 'assets/games/three-doors-of-fate/combat.webp', alt: 'Turn-based card combat in Three Doors of Fate', width: 960, height: 540 },
+          ],
+          links: [
+            { label: 'GitHub', href: 'https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon', external: true },
+            { label: 'WebGL Release', href: 'https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon/releases/latest', external: true },
+          ],
+        },
+        {
+          id: 'nation-eater',
+          title: 'Nation Eater',
+          altTitle: '나라먹기',
+          status: 'iOS SUBMISSION READY',
+          statusTone: 'amber',
+          genre: 'Fictional political-satire idle RPG · simulation',
+          description: 'Rise from ordinary citizen to world chair while collecting the fallout of player-driven schemes, 96 satirical news stories, and 18 endings.',
+          tech: ['React 19', 'Phaser 4', 'TypeScript', 'Capacitor 8'],
+          proof: 'iOS 1.0.1 build 3 archive · documented TestFlight processing · signed iPhone Release QA record',
+          mediaMode: 'phones',
+          icon: { src: 'assets/games/nation-eater/app-icon.webp', alt: 'Nation Eater app icon', width: 512, height: 512 },
+          media: [
+            { src: 'assets/games/nation-eater/citizen.webp', alt: 'Citizen-stage screen in Nation Eater', width: 642, height: 1389 },
+            { src: 'assets/games/nation-eater/crisis-aftermath.webp', alt: 'Scheme aftermath screen in Nation Eater', width: 642, height: 1389 },
+            { src: 'assets/games/nation-eater/world-chair.webp', alt: 'World-chair stage in Nation Eater', width: 642, height: 1389 },
+          ],
+          links: [
+            { label: 'App Store pending', disabled: true },
+            { label: 'Support', href: 'support/en/' },
+            { label: 'Privacy', href: 'privacy/en/' },
+          ],
+        },
       ],
     },
     process: {
@@ -535,6 +692,46 @@ function ScrollProgress({ scrollRef, accent }) {
   );
 }
 
+function GameCard({ game, colors }) {
+  return (
+    <article className="v2-game-card" style={{
+      '--game-hairline': colors.hairline,
+      '--game-panel': colors.panel,
+      '--game-muted': colors.muted,
+      '--game-accent': colors.accent,
+    }}>
+      <div className={'v2-game-media ' + (game.mediaMode === 'phones' ? 'v2-game-phones' : '')}>
+        {game.icon && <img className="v2-game-icon" src={game.icon.src} alt={game.icon.alt} loading="lazy" decoding="async" width={game.icon.width} height={game.icon.height} />}
+        {game.media.map(function(image) {
+          return <img key={image.src} src={image.src} alt={image.alt} loading="lazy" decoding="async" width={image.width} height={image.height} />;
+        })}
+      </div>
+      <div className="v2-game-body">
+        <span className={'v2-game-status ' + game.statusTone}>{game.status}</span>
+        <div className="v2-game-title">
+          <h3>{game.title}</h3>
+          <span className="v2-game-alt-title">{game.altTitle}</span>
+        </div>
+        <p className="v2-game-genre">{game.genre}</p>
+        <p>{game.description}</p>
+        <div className="v2-game-tech">
+          {game.tech.map(function(tag) { return <span key={tag}>{tag}</span>; })}
+        </div>
+        <div className="v2-game-proof"><strong>Proof</strong> · {game.proof}</div>
+        <div className="v2-game-actions">
+          {game.links.map(function(link) {
+            return link.disabled
+              ? <span key={link.label} className="v2-game-link disabled" aria-disabled="true" tabIndex={-1}>{link.label}</span>
+              : link.external
+                ? <a key={link.label} className="v2-game-link" href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
+                : <a key={link.label} className="v2-game-link" href={link.href}>{link.label}</a>;
+          })}
+        </div>
+      </div>
+    </article>
+  );
+}
+
 // ————— V2Monogram —————
 
 function V2Monogram({ dark, lang }) {
@@ -554,7 +751,7 @@ function V2Monogram({ dark, lang }) {
   React.useEffect(function() {
     var root = rootRef.current;
     if (!root) return;
-    var sections = ['intro','about','services','localAi','projects','process','stack','products','contact'];
+    var sections = ['intro','about','services','localAi','projects','games','process','stack','products','contact'];
     var els = sections.map(function(id) { return document.getElementById('v2-' + id); }).filter(Boolean);
     var updateNav = function(id) {
       Object.entries(navButtonsRef.current).forEach(function(entry) {
@@ -862,10 +1059,44 @@ function V2Monogram({ dark, lang }) {
             </Anim>
           </section>
 
-          {/* 06 PROCESS */}
+          {/* 06 GAMES */}
+          <section id="v2-games" style={{
+            padding: '120px 72px',
+            minHeight: '100vh',
+            borderTop: '1px solid ' + hairline,
+            background: bg,
+            '--game-hairline': hairline,
+            '--game-panel': panel,
+            '--game-muted': muted,
+            '--game-accent': accent,
+          }}>
+            <Anim variant="fade-up">
+              <div style={{ fontFamily: '"JetBrains Mono", monospace', color: accent, fontSize: 11, letterSpacing: 2, marginBottom: 24 }}>/ 06 · {t.games.kicker}</div>
+            </Anim>
+            <Anim variant="fade-up" delay={80}>
+              <h2 style={{ fontSize: 'clamp(38px,5vw,72px)', lineHeight: 1.04, letterSpacing: '-0.04em', fontWeight: 500, maxWidth: 900, margin: 0 }}>{t.games.headline}</h2>
+            </Anim>
+            <Anim variant="fade-up" delay={140}>
+              <p style={{ marginTop: 24, maxWidth: 760, color: muted, fontSize: 17, lineHeight: 1.7 }}>{t.games.lead}</p>
+            </Anim>
+            <Anim variant="fade-up" delay={200}>
+              <div className="v2-games-proof">
+                {t.games.proofs.map(function(proof) {
+                  return <div key={proof.label}><strong>{proof.value}</strong><span>{proof.label}</span></div>;
+                })}
+              </div>
+            </Anim>
+            <div className="v2-games-grid">
+              {t.games.items.map(function(game) {
+                return <GameCard key={game.id} game={game} colors={{ fg: fg, muted: muted, hairline: hairline, panel: panel, accent: accent }} />;
+              })}
+            </div>
+          </section>
+
+          {/* 07 PROCESS */}
           <section id="v2-process" style={{ padding: '120px 72px', minHeight: '100vh', borderTop: '1px solid ' + hairline }}>
             <div className="v2-section-grid" style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: 64, alignItems: 'start', marginBottom: 64 }}>
-              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 06</div>{t.process.kicker}</div></Anim>
+              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 07</div>{t.process.kicker}</div></Anim>
               <Anim variant="fade-up" delay={100}><h2 style={{ fontSize: 'clamp(32px,3.5vw,48px)', lineHeight: 1.2, letterSpacing: '-0.02em', fontWeight: 500, margin: 0 }}>{t.process.hl1}<br/>{t.process.hl2}</h2></Anim>
             </div>
             <div style={{ position: 'relative' }}>
@@ -913,10 +1144,10 @@ function V2Monogram({ dark, lang }) {
             </Anim>
           </section>
 
-          {/* 07 STACK */}
+          {/* 08 STACK */}
           <section id="v2-stack" style={{ padding: '80px 72px 60px', borderTop: '1px solid ' + hairline, background: panel }}>
             <div className="v2-section-grid" style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: 64, alignItems: 'start', marginBottom: 64 }}>
-              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 07</div>{t.stack.kicker}</div></Anim>
+              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 08</div>{t.stack.kicker}</div></Anim>
               <Anim variant="fade-up" delay={100}><h2 style={{ fontSize: 'clamp(32px,3.5vw,48px)', lineHeight: 1.2, letterSpacing: '-0.02em', fontWeight: 500, margin: 0 }}>{t.stack.hl1}</h2></Anim>
             </div>
             <div className="v2-stack-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24 }}>
@@ -957,7 +1188,7 @@ function V2Monogram({ dark, lang }) {
           </section>
 
           {/* ============================================================ */}
-          {/* 08 PRODUCTS — Live Software                                */}
+          {/* 09 PRODUCTS — Live Software                                */}
           {/* ============================================================ */}
           <section id="v2-products" style={{
             padding: '120px 72px 96px',
@@ -974,7 +1205,7 @@ function V2Monogram({ dark, lang }) {
                 marginBottom: '16px',
                 fontFamily: "'Inter Tight', Inter, system-ui, sans-serif"
               }}>
-                / 08 · PRODUCTS
+                / 09 · PRODUCTS
               </div>
               <h2 style={{
                 fontSize: 'clamp(32px, 5vw, 56px)',
@@ -1134,11 +1365,11 @@ function V2Monogram({ dark, lang }) {
             </div>
           </section>
 
-          {/* 09 CONTACT */}
+          {/* 10 CONTACT */}
           <section id="v2-contact" style={{ padding: '140px 72px 100px', minHeight: '100vh', borderTop: '1px solid ' + hairline, position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', top: -60, right: -60, opacity: 0.5 }}><AMark size={300} fg={fg} accent={accent} /></div>
             <div className="v2-section-grid" style={{ display: 'grid', gridTemplateColumns: '180px 1fr', gap: 64, alignItems: 'start', position: 'relative' }}>
-              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 09</div>{t.contact.kicker}</div></Anim>
+              <Anim variant="slide-right"><div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: muted, letterSpacing: 2 }}><div style={{ color: accent, marginBottom: 8 }}>/ 10</div>{t.contact.kicker}</div></Anim>
               <div>
                 <Anim variant="fade-up" delay={100}>
                   <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: 11, color: accent, letterSpacing: 2, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}><LiveDot color={accent} />{t.contact.availability}</div>
