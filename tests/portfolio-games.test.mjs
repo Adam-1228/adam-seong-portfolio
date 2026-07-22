@@ -101,3 +101,10 @@ test('keeps status badges theme-aware and disabled actions inert on hover and fo
   );
   assert.doesNotMatch(html, /\.v2-game-link:hover|\.v2-game-link:focus-visible/);
 });
+
+test('synchronizes the document language with the active portfolio locale', () => {
+  assert.match(
+    html,
+    /React\.useEffect\(function\(\) \{\s*document\.documentElement\.lang = lang === 'en' \? 'en' : 'ko';\s*\}, \[lang\]\);/,
+  );
+});

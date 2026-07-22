@@ -757,6 +757,10 @@ function V2Monogram({ dark, lang }) {
   var activeSectionRef = React.useRef('intro');
 
   React.useEffect(function() {
+    document.documentElement.lang = lang === 'en' ? 'en' : 'ko';
+  }, [lang]);
+
+  React.useEffect(function() {
     var root = rootRef.current;
     if (!root) return;
     var sections = ['intro','about','services','localAi','projects','games','process','stack','products','contact'];
