@@ -85,6 +85,9 @@
   .v2-game-tech { display: flex; flex-wrap: wrap; gap: 7px; margin: 18px 0; }
   .v2-game-tech span { border: 1px solid var(--game-hairline); border-radius: 999px; padding: 6px 9px; font: 400 9px "JetBrains Mono",monospace; }
   .v2-game-proof { border-left: 2px solid var(--game-accent); padding: 10px 12px; color: var(--game-muted); background: var(--game-panel); font-size: 11px; line-height: 1.55; }
+  .v2-game-ownership { margin-top: 14px; color: var(--game-muted); font-size: 11px; line-height: 1.55; }
+  .v2-game-ownership strong { color: inherit; font: 600 9px "JetBrains Mono",monospace; letter-spacing: .08em; text-transform: uppercase; }
+  .v2-game-pipeline { margin-top: 10px; border-top: 1px solid var(--game-hairline); padding-top: 10px; color: var(--game-muted); font: 400 9px/1.65 "JetBrains Mono",monospace; overflow-wrap: anywhere; }
   .v2-game-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
   .v2-game-link { display: inline-flex; min-height: 38px; align-items: center; border-radius: 8px; padding: 0 13px; color: inherit; border: 1px solid var(--game-hairline); text-decoration: none; font: 500 10px "JetBrains Mono",monospace; }
   .v2-game-link:not(.disabled):hover, .v2-game-link:not(.disabled):focus-visible { border-color: var(--game-accent); outline: 2px solid var(--game-accent); outline-offset: 2px; }
@@ -249,11 +252,11 @@ const V2_I18N = {
     games: {
       kicker: 'PLAYABLE SYSTEMS · ORIGINAL GAMES',
       headline: '선택과 축적이 만드는 두 개의 플레이 시스템.',
-      lead: '공개 WebGL 릴리스와 iOS 출시 파이프라인까지 진행한 두 개의 오리지널 게임을 소개합니다.',
+      lead: '공개 WebGL 릴리스와 iOS App Store 정식 출시까지 완성한 두 개의 오리지널 게임을 소개합니다.',
       proofs: [
         { value: '2', label: 'Original games' },
         { value: 'WebGL v1.0', label: 'Public release' },
-        { value: 'iOS 1.0.1', label: 'Build 3 ready' },
+        { value: 'iOS 1.0.3', label: 'App Store 출시' },
       ],
       items: [
         {
@@ -281,12 +284,15 @@ const V2_I18N = {
           id: 'nation-eater',
           title: '나라먹기',
           altTitle: 'Nation Eater',
-          status: 'iOS SUBMISSION READY',
-          statusTone: 'amber',
+          status: 'APP STORE RELEASE',
+          statusTone: 'green',
           genre: '허구 정치 풍자 방치형 RPG · 시뮬레이션',
           description: '시민에서 세계 의장까지 성장하며 선택형 공작의 후폭풍, 96종 풍자 뉴스와 18개 엔딩을 수집합니다.',
           tech: ['React 19', 'Phaser 4', 'TypeScript', 'Capacitor 8'],
-          proof: 'iOS 1.0.1 build 3 archive · TestFlight 처리 기록 · 실기기 Release QA 문서',
+          proof: 'App Store v1.0.3 정식 출시 · 실기기 Release QA · Game Center/iCloud 저장 동기화',
+          ownershipLabel: '담당 범위',
+          ownership: '1인 기획 · 게임 디자인 · 제작 · 엔지니어링 · QA · App Store 배포',
+          pipeline: ['아이디어', '게임 디자인', '콘텐츠·아트 파이프라인', '구현', 'QA', 'App Store'],
           mediaMode: 'phones',
           icon: { src: 'assets/games/nation-eater/app-icon.webp', alt: '나라먹기 앱 아이콘', width: 512, height: 512 },
           media: [
@@ -295,7 +301,7 @@ const V2_I18N = {
             { src: 'assets/games/nation-eater/world-chair.webp', alt: '나라먹기의 세계 의장 단계 화면', width: 642, height: 1389 },
           ],
           links: [
-            { label: 'App Store 준비 중', disabled: true },
+            { label: 'App Store', href: 'https://apps.apple.com/kr/app/%EB%82%98%EB%9D%BC%EB%A8%B9%EA%B8%B0/id6791886200', external: true },
             { label: '지원', href: 'support/' },
             { label: '개인정보', href: 'privacy/' },
           ],
@@ -480,11 +486,11 @@ const V2_I18N = {
     games: {
       kicker: 'PLAYABLE SYSTEMS · ORIGINAL GAMES',
       headline: 'Two playable systems built around choice and accumulation.',
-      lead: 'Two original games carried through a public WebGL release and an iOS submission pipeline.',
+      lead: 'Two original games carried through a public WebGL release and a live iOS App Store release.',
       proofs: [
         { value: '2', label: 'Original games' },
         { value: 'WebGL v1.0', label: 'Public release' },
-        { value: 'iOS 1.0.1', label: 'Build 3 ready' },
+        { value: 'iOS 1.0.3', label: 'App Store release' },
       ],
       items: [
         {
@@ -512,12 +518,15 @@ const V2_I18N = {
           id: 'nation-eater',
           title: 'Nation Eater',
           altTitle: '나라먹기',
-          status: 'iOS SUBMISSION READY',
-          statusTone: 'amber',
+          status: 'APP STORE RELEASE',
+          statusTone: 'green',
           genre: 'Fictional political-satire idle RPG · simulation',
           description: 'Rise from ordinary citizen to world chair while collecting the fallout of player-driven schemes, 96 satirical news stories, and 18 endings.',
           tech: ['React 19', 'Phaser 4', 'TypeScript', 'Capacitor 8'],
-          proof: 'iOS 1.0.1 build 3 archive · documented TestFlight processing · signed iPhone Release QA record',
+          proof: 'App Store v1.0.3 live release · signed iPhone Release QA · Game Center/iCloud save sync',
+          ownershipLabel: 'Ownership',
+          ownership: 'Solo product planning · game design · production · engineering · QA · App Store release',
+          pipeline: ['Concept', 'Game Design', 'Content/Art Pipeline', 'Implementation', 'QA', 'App Store'],
           mediaMode: 'phones',
           icon: { src: 'assets/games/nation-eater/app-icon.webp', alt: 'Nation Eater app icon', width: 512, height: 512 },
           media: [
@@ -526,7 +535,7 @@ const V2_I18N = {
             { src: 'assets/games/nation-eater/world-chair.webp', alt: 'World-chair stage in Nation Eater', width: 642, height: 1389 },
           ],
           links: [
-            { label: 'App Store pending', disabled: true },
+            { label: 'App Store', href: 'https://apps.apple.com/kr/app/%EB%82%98%EB%9D%BC%EB%A8%B9%EA%B8%B0/id6791886200', external: true },
             { label: 'Support', href: 'support/en/' },
             { label: 'Privacy', href: 'privacy/en/' },
           ],
@@ -722,6 +731,12 @@ function GameCard({ game, colors }) {
           {game.tech.map(function(tag) { return <span key={tag}>{tag}</span>; })}
         </div>
         <div className="v2-game-proof"><strong>Proof</strong> · {game.proof}</div>
+        {game.ownership && (
+          <div className="v2-game-ownership"><strong>{game.ownershipLabel || 'Role'}</strong> · {game.ownership}</div>
+        )}
+        {game.pipeline && (
+          <div className="v2-game-pipeline">{game.pipeline.join(' → ')}</div>
+        )}
         <div className="v2-game-actions">
           {game.links.map(function(link) {
             return link.disabled

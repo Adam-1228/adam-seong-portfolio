@@ -36,18 +36,26 @@ test('adds Games to both bilingual navigation arrays and renumbers later section
   ]) assert.equal((html.match(new RegExp(expected, 'g')) || []).length, 2, expected);
 });
 
-test('renders a dedicated games section with evidence-safe statuses', () => {
+test('renders a dedicated games section with verified live-release evidence', () => {
   assert.match(html, /<section id="v2-games"/);
   assert.match(html, /PUBLIC RELEASE/);
-  assert.match(html, /iOS SUBMISSION READY/);
-  assert.doesNotMatch(html, /Nation Eater.{0,120}(RELEASED|APP STORE RELEASE)/s);
+  assert.equal((html.match(/APP STORE RELEASE/g) || []).length, 2);
+  assert.doesNotMatch(html, /iOS SUBMISSION READY|App Store pending|App Store 준비 중/);
+  assert.equal((html.match(/iOS 1\.0\.3/g) || []).length, 2);
+  assert.equal((html.match(/id6791886200/g) || []).length, 2);
+  assert.equal((html.match(/ownership:/g) || []).length, 2);
+  assert.equal((html.match(/pipeline:/g) || []).length, 2);
+  assert.match(html, /className="v2-game-ownership"/);
+  assert.match(html, /className="v2-game-pipeline"/);
 });
 
-test('uses verified public links and disabled App Store semantics', () => {
+test('uses verified public game and App Store links', () => {
   assert.match(html, /https:\/\/github\.com\/Adam-1228\/ThreeDoorsOfFate-Hackathon/);
   assert.match(html, /https:\/\/github\.com\/Adam-1228\/ThreeDoorsOfFate-Hackathon\/releases\/latest/);
-  assert.match(html, /aria-disabled="true"/);
-  assert.match(html, /tabIndex=\{-1\}/);
+  assert.equal(
+    (html.match(/https:\/\/apps\.apple\.com\/kr\/app\/%EB%82%98%EB%9D%BC%EB%A8%B9%EA%B8%B0\/id6791886200/g) || []).length,
+    2,
+  );
   assert.match(html, /rel="noopener noreferrer"/);
 });
 
