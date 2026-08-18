@@ -6,7 +6,7 @@
 
 **Architecture:** Keep the existing split workflow: the ReportLab source and versioned render stay in the non-Git PDF artifact workspace, while the website repository owns the reusable game media, localized web copy, regression tests, and stable public PDF filename. Generate and validate the PDF first, copy the verified bytes into the site repository, then deploy the site and compare the public PDF hash with the committed file.
 
-**Tech Stack:** Python 3.13, ReportLab, Pillow, pypdf, pytest, Poppler, single-file React/Babel, Node.js test runner, Git, GitHub Pages
+**Tech Stack:** Python 3.13, ReportLab, Pillow, pypdf, stdlib unittest, Poppler, single-file React/Babel, Node.js test runner, Git, GitHub Pages
 
 ## Global Constraints
 
@@ -213,10 +213,11 @@ Expected: the commit contains only `index.html` and `tests/portfolio-games.test.
 **Interfaces:**
 - Consumes: `scripts.build_portfolio_pdf.build() -> Path`.
 - Produces: a repeatable 11-page content, metadata, page-size, and URI acceptance gate for Tasks 3 and 4.
+- Runtime note: the bundled Python does not include pytest, so the implemented contract uses stdlib `unittest` with the same assertions and no extra dependency install.
 
 - [ ] **Step 1: Create the PDF contract test**
 
-Create the file with this content:
+Initial assertion sketch (pytest form). The checked-in implementation translates this contract to stdlib `unittest` as noted above:
 
 ```python
 from __future__ import annotations
@@ -326,7 +327,7 @@ def test_pdf_has_current_public_links_and_no_planning_copy(portfolio_pdf: tuple[
 Run with the bundled Python:
 
 ```powershell
-& 'C:\Users\ADAM\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m pytest tests\test_portfolio_pdf.py -v
+& 'C:\Users\ADAM\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' tests\test_portfolio_pdf.py -v
 ```
 
 Expected: FAIL on the old `v4` filename, 10-page count, `Portfolio v2` metadata/footer, missing Nation Eater page, and stale planning copy.
@@ -611,7 +612,7 @@ def build() -> Path:
 - [ ] **Step 7: Run the PDF contract test**
 
 ```powershell
-& 'C:\Users\ADAM\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m pytest tests\test_portfolio_pdf.py -v
+& 'C:\Users\ADAM\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' tests\test_portfolio_pdf.py -v
 ```
 
 Expected: all PDF contract tests PASS.
@@ -669,7 +670,7 @@ Use `view_image` on every `page-*.png`, with original detail for pages 7 and 8. 
 - [ ] **Step 5: Re-run tests after any visual adjustment**
 
 ```powershell
-& 'C:\Users\ADAM\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m pytest tests\test_portfolio_pdf.py -v
+& 'C:\Users\ADAM\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' tests\test_portfolio_pdf.py -v
 ```
 
 Expected: PASS after the final visual render.
@@ -835,7 +836,7 @@ Expected: HTTP 200, `application/pdf`, and both hashes and byte sizes match exac
 ```powershell
 $env:PORTFOLIO_PDF_UNDER_TEST = $publicPdf
 try {
-    & 'C:\Users\ADAM\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m pytest 'C:\Users\ADAM\Documents\Codex\project\내 사이트\tests\test_portfolio_pdf.py' -v
+    & 'C:\Users\ADAM\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' 'C:\Users\ADAM\Documents\Codex\project\내 사이트\tests\test_portfolio_pdf.py' -v
 } finally {
     Remove-Item Env:PORTFOLIO_PDF_UNDER_TEST -ErrorAction SilentlyContinue
 }
@@ -859,7 +860,7 @@ Remove-Item -LiteralPath $renderDir -Recurse -Force
 Final report must include:
 
 - final site commit;
-- Node and pytest results;
+- Node and unittest results;
 - PDF page count and metadata;
 - local/committed/public PDF byte size and SHA-256;
 - GitHub Pages run status;

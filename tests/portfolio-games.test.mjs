@@ -47,6 +47,12 @@ test('renders exactly two current games with verified release states', () => {
   assert.doesNotMatch(html, /iOS SUBMISSION READY|App Store 준비 중|App Store pending/);
 });
 
+test('keeps the hero game proof aligned with the two released titles', () => {
+  assert.match(html, /\{ k: '2', v: 'App Store 출시 오리지널 게임' \}/);
+  assert.match(html, /\{ k: '2', v: 'Original games on the App Store' \}/);
+  assert.doesNotMatch(html, /\{ k: '4\+', v: 'Codex/);
+});
+
 test('uses verified App Store and public release links', () => {
   assert.equal(
     (html.match(/https:\/\/apps\.apple\.com\/kr\/app\/three-doors-of-fate\/id6798086296/g) || []).length,
