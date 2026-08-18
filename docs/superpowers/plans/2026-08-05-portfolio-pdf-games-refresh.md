@@ -14,8 +14,9 @@
 - PDF artifact workspace: `C:\Users\ADAM\Documents\Codex\project\내 사이트`.
 - Planning base: site `main` at `3b14ad8d741f10f257be8c8c6e71d5d47314ac26`, one approved-spec commit ahead of `origin/main`.
 - The PDF game section contains exactly `Three Doors of Fate` and `나라먹기 / Nation Eater`.
-- Three Doors Korean status is exactly `공개 다운로드 제공 · 정식 스토어/웹 배포 대기`.
-- Three Doors English status is exactly `PUBLIC DOWNLOAD · STORE/HOSTED WEB RELEASE PENDING`.
+- Three Doors Korean status is exactly `Apple App Store 출시`.
+- Three Doors English status is exactly `LIVE ON THE APP STORE`.
+- Three Doors uses track ID `6798086296`, version `1.0.4`, the Korean store URL in Korean content, and the United States store URL in English content.
 - Nation Eater Korean status is exactly `한국 App Store 출시`.
 - Nation Eater English status is exactly `LIVE ON THE KR APP STORE`.
 - Nation Eater links only to the verified Korean App Store track `6791886200`; do not imply US or worldwide availability.
@@ -65,14 +66,22 @@ test('renders exactly two current games with verified release states', () => {
   assert.match(html, /<section id="v2-games"/);
   assert.equal((html.match(/id: 'three-doors-of-fate'/g) || []).length, 2);
   assert.equal((html.match(/id: 'nation-eater'/g) || []).length, 2);
-  assert.match(html, /공개 다운로드 제공 · 정식 스토어\/웹 배포 대기/);
-  assert.match(html, /PUBLIC DOWNLOAD · STORE\/HOSTED WEB RELEASE PENDING/);
+  assert.match(html, /Apple App Store 출시/);
+  assert.match(html, /LIVE ON THE APP STORE/);
   assert.match(html, /한국 App Store 출시/);
   assert.match(html, /LIVE ON THE KR APP STORE/);
   assert.doesNotMatch(html, /iOS SUBMISSION READY|App Store 준비 중|App Store pending/);
 });
 
-test('uses verified public release and Korean App Store links', () => {
+test('uses verified App Store and public release links', () => {
+  assert.equal(
+    (html.match(/https:\/\/apps\.apple\.com\/kr\/app\/three-doors-of-fate\/id6798086296/g) || []).length,
+    1,
+  );
+  assert.equal(
+    (html.match(/https:\/\/apps\.apple\.com\/us\/app\/three-doors-of-fate\/id6798086296/g) || []).length,
+    1,
+  );
   assert.match(html, /https:\/\/github\.com\/Adam-1228\/ThreeDoorsOfFate-Hackathon/);
   assert.match(html, /https:\/\/github\.com\/Adam-1228\/ThreeDoorsOfFate-Hackathon\/releases\/latest/);
   assert.equal(
@@ -93,27 +102,32 @@ Run:
 node --test tests/portfolio-games.test.mjs
 ```
 
-Expected: FAIL because `index.html` still contains `PUBLIC RELEASE`, `iOS SUBMISSION READY`, and the disabled App Store CTA.
+Expected: FAIL because `index.html` still contains `PUBLIC RELEASE`, lacks the Three Doors App Store URLs, contains `iOS SUBMISSION READY`, and uses the disabled Nation Eater App Store CTA.
 
 - [ ] **Step 3: Update the Korean game data**
 
 Apply these exact data changes inside the Korean `games` object:
 
 ```js
-lead: '공개 다운로드 릴리스와 한국 App Store 출시까지 이어진 두 개의 오리지널 게임을 소개합니다.',
+lead: 'Apple App Store 출시까지 완료한 두 개의 오리지널 게임을 소개합니다.',
 proofs: [
   { value: '2', label: 'Original games' },
-  { value: 'WebGL v1.0', label: 'Public download' },
-  { value: 'iOS 1.0.3', label: 'KR App Store' },
+  { value: 'iOS 1.0.4', label: 'Three Doors' },
+  { value: 'iOS 1.0.3', label: '나라먹기' },
 ],
 ```
 
 For Three Doors of Fate:
 
 ```js
-status: '공개 다운로드 제공 · 정식 스토어/웹 배포 대기',
-statusTone: 'amber',
-proof: '공개 GitHub 저장소 · WebGL v1.0.0 다운로드 · 3종 클래스와 10룸 진행',
+status: 'Apple App Store 출시',
+statusTone: 'green',
+proof: 'Apple App Store 1.0.4 · 공개 WebGL 다운로드 · 3종 클래스와 10룸 진행',
+links: [
+  { label: 'App Store에서 보기', href: 'https://apps.apple.com/kr/app/three-doors-of-fate/id6798086296', external: true },
+  { label: 'GitHub', href: 'https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon', external: true },
+  { label: 'WebGL Release', href: 'https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon/releases/latest', external: true },
+],
 ```
 
 For 나라먹기:
@@ -134,20 +148,25 @@ links: [
 Apply these exact data changes inside the English `games` object:
 
 ```js
-lead: 'Two original games carried through a public downloadable release and a verified Korean App Store launch.',
+lead: 'Two original games carried through verified Apple App Store launches.',
 proofs: [
   { value: '2', label: 'Original games' },
-  { value: 'WebGL v1.0', label: 'Public download' },
-  { value: 'iOS 1.0.3', label: 'KR App Store' },
+  { value: 'iOS 1.0.4', label: 'Three Doors' },
+  { value: 'iOS 1.0.3', label: 'Nation Eater' },
 ],
 ```
 
 For Three Doors of Fate:
 
 ```js
-status: 'PUBLIC DOWNLOAD · STORE/HOSTED WEB RELEASE PENDING',
-statusTone: 'amber',
-proof: 'Public GitHub repository · WebGL v1.0.0 download · three classes and ten-room progression',
+status: 'LIVE ON THE APP STORE',
+statusTone: 'green',
+proof: 'App Store 1.0.4 · public WebGL download · three classes and ten-room progression',
+links: [
+  { label: 'View on App Store', href: 'https://apps.apple.com/us/app/three-doors-of-fate/id6798086296', external: true },
+  { label: 'GitHub', href: 'https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon', external: true },
+  { label: 'WebGL Release', href: 'https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon/releases/latest', external: true },
+],
 ```
 
 For Nation Eater:
@@ -216,7 +235,8 @@ ROOT = Path(__file__).resolve().parents[1]
 BUILDER_PATH = ROOT / "scripts" / "build_portfolio_pdf.py"
 EXPECTED_TITLE = "Adam Seong - AI Engineer & Product Builder Portfolio - 2026.08"
 EXPECTED_FOOTER = "Adam Seong - AI Engineer & Product Builder - 2026.08"
-APP_STORE_URL = "https://apps.apple.com/kr/app/%EB%82%98%EB%9D%BC%EB%A8%B9%EA%B8%B0/id6791886200"
+THREE_APP_STORE_URL = "https://apps.apple.com/kr/app/three-doors-of-fate/id6798086296"
+NATION_APP_STORE_URL = "https://apps.apple.com/kr/app/%EB%82%98%EB%9D%BC%EB%A8%B9%EA%B8%B0/id6791886200"
 
 
 def load_builder() -> ModuleType:
@@ -269,7 +289,8 @@ def test_pdf_contains_only_the_two_approved_game_pages(portfolio_pdf: tuple[Path
     _, reader = portfolio_pdf
     game_text = "\n".join((reader.pages[index].extract_text() or "") for index in (6, 7))
     assert "Three Doors of Fate" in game_text
-    assert "공개 다운로드 제공 · 정식 스토어/웹 배포 대기" in game_text
+    assert "Apple App Store 출시" in game_text
+    assert "1.0.4" in game_text
     assert "나라먹기" in game_text
     assert "한국 App Store 출시" in game_text
     assert "1.0.3" in game_text
@@ -285,7 +306,8 @@ def test_pdf_has_current_public_links_and_no_planning_copy(portfolio_pdf: tuple[
     assert {
         "https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon",
         "https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon/releases/latest",
-        APP_STORE_URL,
+        THREE_APP_STORE_URL,
+        NATION_APP_STORE_URL,
         "https://adam-1228.github.io/adam-seong-portfolio/support/",
         "https://adam-1228.github.io/adam-seong-portfolio/privacy/",
     }.issubset(uris)
@@ -343,7 +365,8 @@ PAGE_W, PAGE_H = A4
 TOTAL_PAGES = 11
 FOOTER_IDENTITY = "Adam Seong - AI Engineer & Product Builder - 2026.08"
 PDF_TITLE = "Adam Seong - AI Engineer & Product Builder Portfolio - 2026.08"
-APP_STORE_URL = "https://apps.apple.com/kr/app/%EB%82%98%EB%9D%BC%EB%A8%B9%EA%B8%B0/id6791886200"
+THREE_APP_STORE_URL = "https://apps.apple.com/kr/app/three-doors-of-fate/id6798086296"
+NATION_APP_STORE_URL = "https://apps.apple.com/kr/app/%EB%82%98%EB%9D%BC%EB%A8%B9%EA%B8%B0/id6791886200"
 ```
 
 Define an explicit asset map immediately below the color constants:
@@ -477,17 +500,18 @@ def page_7_three_doors(c: canvas.Canvas) -> None:
         "Three Doors of Fate",
         "세 개의 문 뒤에 숨은 위험과 보상을 선택하고 카드, 행운 주사위, 체력, 골드, 빚을 관리해 보스를 돌파하는 한국어 싱글 플레이 덱빌딩 로그라이크.",
     )
-    pill(c, 46, y - 10, "공개 다운로드 제공 · 정식 스토어/웹 배포 대기", bg=colors.HexColor("#FFF4DB"), fg=colors.HexColor("#9A5A00"), size=7.2, h=20)
+    pill(c, 46, y - 10, "Apple App Store 출시", bg=colors.HexColor("#E7F8EE"), fg=colors.HexColor("#147A3D"), size=8, h=20)
     draw_image_contain(c, GAME_ASSETS["three_classes"], 46, y - 260, PAGE_W - 92, 218)
     draw_image_contain(c, GAME_ASSETS["three_doors"], 46, y - 390, 244, 116)
     draw_image_contain(c, GAME_ASSETS["three_combat"], 305, y - 390, 244, 116)
-    metric(c, 46, y - 484, 116, 70, "v1.0.0", "공개 WebGL 다운로드", accent=GREEN)
+    metric(c, 46, y - 484, 116, 70, "1.0.4", "Apple App Store", accent=GREEN)
     metric(c, 174, y - 484, 116, 70, "3", "플레이어 클래스", accent=BLUE)
     metric(c, 302, y - 484, 116, 70, "10", "룸 보스 진행", accent=PURPLE)
     metric(c, 430, y - 484, 119, 70, "Unity 6", "C# · Turn-based", accent=AMBER)
     draw_action_links(
         c,
         [
+            Link("Apple App Store", THREE_APP_STORE_URL),
             Link("GitHub", "https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon"),
             Link("v1.0.0 다운로드", "https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon/releases/latest"),
         ],
@@ -498,7 +522,7 @@ def page_7_three_doors(c: canvas.Canvas) -> None:
     c.showPage()
 ```
 
-During implementation, render this page immediately. If the status pill exceeds the available width, reduce only its font size to no less than `6.6`; do not abbreviate the approved status.
+During implementation, render this page immediately and keep the App Store status visually primary while GitHub and WebGL remain secondary proof links.
 
 - [ ] **Step 5: Add the Nation Eater page**
 
@@ -530,7 +554,7 @@ def page_8_nation_eater(c: canvas.Canvas) -> None:
     draw_action_links(
         c,
         [
-            Link("한국 App Store", APP_STORE_URL),
+            Link("한국 App Store", NATION_APP_STORE_URL),
             Link("지원", "https://adam-1228.github.io/adam-seong-portfolio/support/"),
             Link("개인정보", "https://adam-1228.github.io/adam-seong-portfolio/privacy/"),
         ],
@@ -719,6 +743,7 @@ Use browser automation to verify Korean and English at desktop and `390x844`, in
 
 - both game cards render;
 - new status labels are visible;
+- Three Doors App Store CTA uses the verified Korean URL in Korean and the verified United States URL in English;
 - Nation Eater App Store CTA is a focusable anchor with the verified KR URL;
 - Three Doors GitHub and release links are active;
 - seven images decode;
@@ -784,6 +809,7 @@ Poll the matching run with `gh run watch <run-id> --exit-status`. Expected: the 
 Open `https://adam-1228.github.io/adam-seong-portfolio/#v2-games` in a fresh browser context. Confirm:
 
 - Korean and English release labels match the approved wording;
+- Three Doors links to the verified locale-appropriate App Store page;
 - Nation Eater links to the verified KR App Store page;
 - Three Doors links to GitHub and the public v1.0.0 download release;
 - the page renders at desktop and `390x844` without console errors or overflow.
@@ -838,5 +864,5 @@ Final report must include:
 - local/committed/public PDF byte size and SHA-256;
 - GitHub Pages run status;
 - desktop/mobile and Korean/English browser QA result;
-- direct public site, App Store, Three Doors release, and PDF URLs;
+- direct public site, both Three Doors App Store URLs, Nation Eater App Store URL, Three Doors GitHub release, and PDF URLs;
 - any remaining unverified distribution scope.
