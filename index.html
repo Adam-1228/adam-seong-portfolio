@@ -249,23 +249,23 @@ const V2_I18N = {
     games: {
       kicker: 'PLAYABLE SYSTEMS · ORIGINAL GAMES',
       headline: '선택과 축적이 만드는 두 개의 플레이 시스템.',
-      lead: '공개 WebGL 릴리스와 iOS 출시 파이프라인까지 진행한 두 개의 오리지널 게임을 소개합니다.',
+      lead: 'Apple App Store 출시까지 완료한 두 개의 오리지널 게임을 소개합니다.',
       proofs: [
         { value: '2', label: 'Original games' },
-        { value: 'WebGL v1.0', label: 'Public release' },
-        { value: 'iOS 1.0.1', label: 'Build 3 ready' },
+        { value: 'iOS 1.0.4', label: 'Three Doors' },
+        { value: 'iOS 1.0.3', label: '나라먹기' },
       ],
       items: [
         {
           id: 'three-doors-of-fate',
           title: 'Three Doors of Fate',
           altTitle: '세 개의 운명의 문',
-          status: 'PUBLIC RELEASE',
+          status: 'Apple App Store 출시',
           statusTone: 'green',
           genre: '한국어 싱글 플레이 덱빌딩 로그라이크',
           description: '세 개의 문 뒤에 숨은 위험과 보상을 선택하고, 카드·행운 주사위·빚을 관리해 보스를 돌파합니다.',
           tech: ['Unity 6', 'C#', 'Turn-based', 'WebGL'],
-          proof: '공개 GitHub 저장소 · WebGL v1.0.0 릴리스 · 3종 클래스와 10룸 진행',
+          proof: 'Apple App Store 1.0.4 · 공개 WebGL 다운로드 · 3종 클래스와 10룸 진행',
           mediaMode: 'landscape',
           media: [
             { src: 'assets/games/three-doors-of-fate/class-selection.webp', alt: 'Three Doors of Fate의 세 클래스 선택 화면', width: 960, height: 540 },
@@ -273,6 +273,7 @@ const V2_I18N = {
             { src: 'assets/games/three-doors-of-fate/combat.webp', alt: 'Three Doors of Fate의 카드 전투 화면', width: 960, height: 540 },
           ],
           links: [
+            { label: 'App Store에서 보기', href: 'https://apps.apple.com/kr/app/three-doors-of-fate/id6798086296', external: true },
             { label: 'GitHub', href: 'https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon', external: true },
             { label: 'WebGL Release', href: 'https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon/releases/latest', external: true },
           ],
@@ -281,12 +282,12 @@ const V2_I18N = {
           id: 'nation-eater',
           title: '나라먹기',
           altTitle: 'Nation Eater',
-          status: 'iOS SUBMISSION READY',
-          statusTone: 'amber',
+          status: '한국 App Store 출시',
+          statusTone: 'green',
           genre: '허구 정치 풍자 방치형 RPG · 시뮬레이션',
           description: '시민에서 세계 의장까지 성장하며 선택형 공작의 후폭풍, 96종 풍자 뉴스와 18개 엔딩을 수집합니다.',
           tech: ['React 19', 'Phaser 4', 'TypeScript', 'Capacitor 8'],
-          proof: 'iOS 1.0.1 build 3 archive · TestFlight 처리 기록 · 실기기 Release QA 문서',
+          proof: '한국 App Store 1.0.3 · 6단계 성장 · 96종 풍자 뉴스 · 18개 엔딩',
           mediaMode: 'phones',
           icon: { src: 'assets/games/nation-eater/app-icon.webp', alt: '나라먹기 앱 아이콘', width: 512, height: 512 },
           media: [
@@ -295,7 +296,7 @@ const V2_I18N = {
             { src: 'assets/games/nation-eater/world-chair.webp', alt: '나라먹기의 세계 의장 단계 화면', width: 642, height: 1389 },
           ],
           links: [
-            { label: 'App Store 준비 중', disabled: true },
+            { label: 'App Store에서 보기', href: 'https://apps.apple.com/kr/app/%EB%82%98%EB%9D%BC%EB%A8%B9%EA%B8%B0/id6791886200', external: true },
             { label: '지원', href: 'support/' },
             { label: '개인정보', href: 'privacy/' },
           ],
@@ -480,23 +481,23 @@ const V2_I18N = {
     games: {
       kicker: 'PLAYABLE SYSTEMS · ORIGINAL GAMES',
       headline: 'Two playable systems built around choice and accumulation.',
-      lead: 'Two original games carried through a public WebGL release and an iOS submission pipeline.',
+      lead: 'Two original games carried through verified Apple App Store launches.',
       proofs: [
         { value: '2', label: 'Original games' },
-        { value: 'WebGL v1.0', label: 'Public release' },
-        { value: 'iOS 1.0.1', label: 'Build 3 ready' },
+        { value: 'iOS 1.0.4', label: 'Three Doors' },
+        { value: 'iOS 1.0.3', label: 'Nation Eater' },
       ],
       items: [
         {
           id: 'three-doors-of-fate',
           title: 'Three Doors of Fate',
           altTitle: '세 개의 운명의 문',
-          status: 'PUBLIC RELEASE',
+          status: 'LIVE ON THE APP STORE',
           statusTone: 'green',
           genre: 'Korean-first single-player deck-building roguelike',
           description: 'Choose the risk or reward behind three doors, then manage cards, luck dice, health, gold, and debt to defeat each boss.',
           tech: ['Unity 6', 'C#', 'Turn-based', 'WebGL'],
-          proof: 'Public GitHub repository · WebGL v1.0.0 release · three classes and ten-room progression',
+          proof: 'App Store 1.0.4 · public WebGL download · three classes and ten-room progression',
           mediaMode: 'landscape',
           media: [
             { src: 'assets/games/three-doors-of-fate/class-selection.webp', alt: 'Three character classes in Three Doors of Fate', width: 960, height: 540 },
@@ -504,6 +505,7 @@ const V2_I18N = {
             { src: 'assets/games/three-doors-of-fate/combat.webp', alt: 'Turn-based card combat in Three Doors of Fate', width: 960, height: 540 },
           ],
           links: [
+            { label: 'View on App Store', href: 'https://apps.apple.com/us/app/three-doors-of-fate/id6798086296', external: true },
             { label: 'GitHub', href: 'https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon', external: true },
             { label: 'WebGL Release', href: 'https://github.com/Adam-1228/ThreeDoorsOfFate-Hackathon/releases/latest', external: true },
           ],
@@ -512,12 +514,12 @@ const V2_I18N = {
           id: 'nation-eater',
           title: 'Nation Eater',
           altTitle: '나라먹기',
-          status: 'iOS SUBMISSION READY',
-          statusTone: 'amber',
+          status: 'LIVE ON THE KR APP STORE',
+          statusTone: 'green',
           genre: 'Fictional political-satire idle RPG · simulation',
           description: 'Rise from ordinary citizen to world chair while collecting the fallout of player-driven schemes, 96 satirical news stories, and 18 endings.',
           tech: ['React 19', 'Phaser 4', 'TypeScript', 'Capacitor 8'],
-          proof: 'iOS 1.0.1 build 3 archive · documented TestFlight processing · signed iPhone Release QA record',
+          proof: 'KR App Store 1.0.3 · six progression stages · 96 satirical news stories · 18 endings',
           mediaMode: 'phones',
           icon: { src: 'assets/games/nation-eater/app-icon.webp', alt: 'Nation Eater app icon', width: 512, height: 512 },
           media: [
@@ -526,7 +528,7 @@ const V2_I18N = {
             { src: 'assets/games/nation-eater/world-chair.webp', alt: 'World-chair stage in Nation Eater', width: 642, height: 1389 },
           ],
           links: [
-            { label: 'App Store pending', disabled: true },
+            { label: 'View on KR App Store', href: 'https://apps.apple.com/kr/app/%EB%82%98%EB%9D%BC%EB%A8%B9%EA%B8%B0/id6791886200', external: true },
             { label: 'Support', href: 'support/en/' },
             { label: 'Privacy', href: 'privacy/en/' },
           ],

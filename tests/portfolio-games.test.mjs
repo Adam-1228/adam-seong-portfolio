@@ -36,18 +36,34 @@ test('adds Games to both bilingual navigation arrays and renumbers later section
   ]) assert.equal((html.match(new RegExp(expected, 'g')) || []).length, 2, expected);
 });
 
-test('renders a dedicated games section with evidence-safe statuses', () => {
+test('renders exactly two current games with verified release states', () => {
   assert.match(html, /<section id="v2-games"/);
-  assert.match(html, /PUBLIC RELEASE/);
-  assert.match(html, /iOS SUBMISSION READY/);
-  assert.doesNotMatch(html, /Nation Eater.{0,120}(RELEASED|APP STORE RELEASE)/s);
+  assert.equal((html.match(/id: 'three-doors-of-fate'/g) || []).length, 2);
+  assert.equal((html.match(/id: 'nation-eater'/g) || []).length, 2);
+  assert.match(html, /Apple App Store 출시/);
+  assert.match(html, /LIVE ON THE APP STORE/);
+  assert.match(html, /한국 App Store 출시/);
+  assert.match(html, /LIVE ON THE KR APP STORE/);
+  assert.doesNotMatch(html, /iOS SUBMISSION READY|App Store 준비 중|App Store pending/);
 });
 
-test('uses verified public links and disabled App Store semantics', () => {
+test('uses verified App Store and public release links', () => {
+  assert.equal(
+    (html.match(/https:\/\/apps\.apple\.com\/kr\/app\/three-doors-of-fate\/id6798086296/g) || []).length,
+    1,
+  );
+  assert.equal(
+    (html.match(/https:\/\/apps\.apple\.com\/us\/app\/three-doors-of-fate\/id6798086296/g) || []).length,
+    1,
+  );
   assert.match(html, /https:\/\/github\.com\/Adam-1228\/ThreeDoorsOfFate-Hackathon/);
   assert.match(html, /https:\/\/github\.com\/Adam-1228\/ThreeDoorsOfFate-Hackathon\/releases\/latest/);
-  assert.match(html, /aria-disabled="true"/);
-  assert.match(html, /tabIndex=\{-1\}/);
+  assert.equal(
+    (html.match(/https:\/\/apps\.apple\.com\/kr\/app\/%EB%82%98%EB%9D%BC%EB%A8%B9%EA%B8%B0\/id6791886200/g) || []).length,
+    2,
+  );
+  assert.match(html, /label: 'App Store에서 보기'/);
+  assert.match(html, /label: 'View on KR App Store'/);
   assert.match(html, /rel="noopener noreferrer"/);
 });
 
