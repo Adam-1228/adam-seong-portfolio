@@ -44,7 +44,14 @@ test('renders exactly two current games with verified release states', () => {
   assert.match(html, /LIVE ON THE APP STORE/);
   assert.match(html, /한국 App Store 출시/);
   assert.match(html, /LIVE ON THE KR APP STORE/);
-  assert.doesNotMatch(html, /iOS SUBMISSION READY|App Store 준비 중|App Store pending/);
+  assert.equal((html.match(/ownership:/g) || []).length, 2);
+  assert.equal((html.match(/pipeline:/g) || []).length, 2);
+  assert.match(html, /className="v2-game-ownership"/);
+  assert.match(html, /className="v2-game-pipeline"/);
+  assert.doesNotMatch(
+    html,
+    /iOS SUBMISSION READY|App Store 준비 중|App Store pending|PUBLIC RELEASE|APP STORE RELEASE/,
+  );
 });
 
 test('keeps the hero game proof aligned with the two released titles', () => {
